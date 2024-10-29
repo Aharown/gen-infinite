@@ -7,22 +7,3 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-require 'populator'
-require 'faker'
-
-User.populate(5) do |user|
-  user.name = Faker::Name.name
-  user.email = Faker::Internet.email
-  user.bio = Faker::Quote.famous_last_words
-end
-
-Post.populate(10) do |post|
-  post.title = Faker::Book.title
-  post.content = Faker::Lorem.paragraph(sentence_count: 5)
-  post.user_id = User.ids.sample
-end
-
-Answer.populate(10) do |answer|
-  answer.content = Faker::Lorem.paragraph(sentence_count: 2)
-  answer.post_id = Post.ids.sample
-end
