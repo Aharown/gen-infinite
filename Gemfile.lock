@@ -127,9 +127,12 @@ GEM
     error_highlight (0.6.0)
     erubi (1.13.0)
     execjs (2.10.0)
-    ffi (1.17.0)
+    faker (3.5.1)
+      i18n (>= 1.8.11, < 2)
+    ffi (1.17.0-aarch64-linux-gnu)
     ffi (1.17.0-arm64-darwin)
     ffi (1.17.0-x86_64-darwin)
+    ffi (1.17.0-x86_64-linux-gnu)
     font-awesome-sass (6.5.2)
       sassc (~> 2.0)
     globalid (1.2.1)
@@ -183,6 +186,7 @@ GEM
     orm_adapter (0.5.0)
     pg (1.5.9)
     popper_js (2.11.8)
+    populator (1.0.0)
     psych (5.1.2)
       stringio
     public_suffix (6.0.1)
@@ -300,10 +304,12 @@ DEPENDENCIES
   devise
   dotenv-rails
   error_highlight (>= 0.4.0)
+  faker
   font-awesome-sass (~> 6.1)
   importmap-rails
   jbuilder
   pg (~> 1.1)
+  populator
   puma (>= 5.0)
   rails (~> 7.1.4)
   sassc-rails
