@@ -1,0 +1,86 @@
+<div class="form-main-styles-container">
+  <div class="form-container-grid">
+    <div class="header">
+      <h2><%= mode %></h2>
+    </div>
+
+    <%= form_with(model: @post, local: true, html: { multipart: true }) do |form| %>
+      <!-- Title -->
+      <div class="form-group">
+        <h4><%= form.label :title, "Title" %></h4>
+        <%= form.text_field :title, class: "form-control", placeholder: "Enter the post title" %>
+      </div>
+
+      <!-- Content -->
+      <div class="form-group">
+        <h4><%= form.label :content, "Content" %></h4>
+        <%= form.text_area :content, class: "form-control", rows: 3, placeholder: "Share your knowledge/questions" %>
+      </div>
+
+      <!-- Category -->
+      <div class="form-group">
+        <h4><%= form.label :category_id, "Category" %></h4>
+        <%= form.collection_select :category_id, Category.all, :id, :title, { prompt: "Select a Category" }, class: "form-control" %>
+      </div>
+
+      <!-- Display existing photos -->
+      <% if @post.photos.attached? %>
+        <div class="existing-photos">
+          <h4>Existing Photos:</h4>
+          <% @post.photos.each do |photo| %>
+            <div class="photo">
+              <%= cl_image_tag photo.key, alt: @post.title, class: 'post-image-form' %>
+              <%= check_box_tag "remove_photos[]", photo.id %>
+              <%= label_tag "remove_photos_#{photo.id}", "Remove this photo" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
+      <!-- File Uploads -->
+      <div class="form-group">
+        <%= form.label :photos, "Upload Photos (optional)" %>
+        <%= form.file_field :photos, multiple: true, class: "form-control", id: "post_photos" %>
+        <small class="form-text text-muted">You can upload up to 4 photos for your post.</small>
+      </div>
+
+      <!-- Preview Container -->
+      <div id="preview-container" class="photo-preview"></div>
+
+      <!-- Submit Button -->
+      <div class="form-group-button">
+        <%= form.submit (@post.persisted? ? "Save changes" : "Post"), class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<script>
+document.addEventListener('turbo:load', function() {
+  const photoInput = document.getElementById('post_photos');
+  const previewContainer = document.getElementById('preview-container');
+
+  photoInput.addEventListener('change', function(event) {
+    const files = Array.from(event.target.files);
+
+    // Clear previous previews - keep existing ones
+    previewContainer.innerHTML = '';
+
+    // Limit the number of files to 4
+    const maxFiles = 4;
+    const selectedFiles = files.slice(0, maxFiles);
+
+    // Preview newly uploaded photos
+    selectedFiles.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.alt = file.name;
+        img.className = 'post-image';
+        previewContainer.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    });
+  });
+});
+</script>
