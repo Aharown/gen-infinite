@@ -1,9 +1,13 @@
 // Import Google fonts
+@import "bootstrap"; // Assure-toi que le chemin est correct
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700|Work+Sans:400,700&display=swap');
 
 // Define fonts for body and headers
-$body-font: "Work Sans", "Helvetica", "sans-serif";
+$headers-font: 'Arial', sans-serif; // Ou une autre police de ton choix
 $headers-font: "Nunito", "Helvetica", "sans-serif";
+$body-font: 'Helvetica Neue', sans-serif; // Ou une autre police de ton choix
+$body-font: "Work Sans", "Helvetica", "sans-serif";
+
 
 // To use a font file (.woff) uncomment following lines
 // @font-face {

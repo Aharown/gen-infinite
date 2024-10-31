@@ -20,11 +20,13 @@ User.populate(5) do |user|
   user.intro = "A passionate #{Faker::Job.title.downcase} with a keen interest in #{Faker::Hobby.activity.downcase} and #{Faker::Educator.subject.downcase}."
   user.bio = Faker::Quote.famous_last_words
 end
+
 Post.populate(10) do |post|
   post.title = Faker::Book.title
   post.content = Faker::Lorem.paragraph(sentence_count: 5)
   post.user_id = User.ids.sample
 end
+
 Answer.populate(10) do |answer|
   answer.content = Faker::Lorem.paragraph(sentence_count: 2)
   answer.post_id = Post.ids.sample
