@@ -7,12 +7,17 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
 require 'populator'
 require 'faker'
+User.destroy_all
+Post.destroy_all
+Answer.destroy_all
 
 User.populate(5) do |user|
   user.name = Faker::Name.name
   user.email = Faker::Internet.email
+  user.intro = "A passionate #{Faker::Job.title.downcase} with a keen interest in #{Faker::Hobby.activity.downcase} and #{Faker::Educator.subject.downcase}."
   user.bio = Faker::Quote.famous_last_words
 end
 
