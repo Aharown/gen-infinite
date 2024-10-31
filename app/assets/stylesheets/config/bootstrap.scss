@@ -1,0 +1,88 @@
+// This is where you override default Bootstrap variables
+// 1. Find all Bootstrap variables that you can override at the end of each component's documentation under the `Sass variables` anchor
+// e.g. here are the ones you can override for the navbar https://getbootstrap.com/docs/5.2/components/navbar/#sass-variables
+// 2. These variables are defined with default value (see https://robots.thoughtbot.com/sass-default)
+// 3. You can override them below!
+
+// Override other variables below!
+$headers-font: 'Arial', sans-serif; // Ou une autre police de ton choix
+$headers-font: "Nunito", "Helvetica", "sans-serif";
+$body-font: 'Helvetica Neue', sans-serif; // Ou une autre police de ton choix
+$body-font: "Work Sans", "Helvetica", "sans-serif";
+$body-font: 'Helvetica Neue', sans-serif;
+
+
+body {
+  background-color: #545454;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+}
+
+.container {
+  height: 100vh;
+}
+
+.card {
+
+  width: 380px;
+  border: none;
+  border-radius: 15px;
+  padding: 8px;
+  background-color: #fff;
+  position: relative;
+  height: 370px;
+}
+
+.upper {
+
+  height: 100px;
+
+}
+
+.upper img {
+
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+}
+
+.user {
+  position: relative;
+}
+
+.profile img {
+
+
+  height: 80px;
+  width: 80px;
+  margin-top: 2px;
+
+
+}
+
+.profile {
+
+  position: absolute;
+  top: -50px;
+  left: 38%;
+  height: 90px;
+  width: 90px;
+  border: 3px solid #fff;
+
+  border-radius: 50%;
+
+}
+
+.follow {
+
+  border-radius: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 35px;
+}
+
+.stats span {
+
+  font-size: 29px;
+}
