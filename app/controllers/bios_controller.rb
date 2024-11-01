@@ -1,2 +1,0 @@
-class BiosController < ApplicationController
-end
