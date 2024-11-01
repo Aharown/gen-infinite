@@ -7,22 +7,72 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-require 'populator'
+
+
 require 'faker'
 
-User.populate(5) do |user|
-  user.name = Faker::Name.name
-  user.email = Faker::Internet.email
-  user.bio = Faker::Quote.famous_last_words
+User.destroy_all
+Post.destroy_all
+Answer.destroy_all
+
+puts 'Seeding users...'
+
+5.times do
+  User.create!(
+    username: Faker::Internet.username(specifier: 5..8),
+    password: "password",
+    email: Faker::Internet.email,
+    intro: "A passionate #{Faker::Job.title.downcase} with a keen interest in #{Faker::Hobby.activity.downcase} and #{Faker::Educator.subject.downcase}.",
+    bio: Faker::Quote.famous_last_words
+  )
 end
 
-Post.populate(10) do |post|
-  post.title = Faker::Book.title
-  post.content = Faker::Lorem.paragraph(sentence_count: 5)
-  post.user_id = User.ids.sample
+puts 'Seeded users'
+
+puts "Seeding categories..."
+
+categories = [
+  "Technology",
+  "Entertainment",
+  "Lifestyle",
+  "Science",
+  "Education",
+  "Gaming",
+  "Business",
+  "Politics",
+  "Arts",
+  "Sports",
+  "DIY & Crafts",
+  "Parenting"
+]
+
+categories.each do |category_name|
+  Category.create!(name: category_name)
 end
 
-Answer.populate(10) do |answer|
-  answer.content = Faker::Lorem.paragraph(sentence_count: 2)
-  answer.post_id = Post.ids.sample
+puts "Seeded categories"
+
+puts "Seeding posts..."
+
+10.times do
+  Post.create!(
+    title: Faker::Book.title,
+    content: Faker::Lorem.paragraph(sentence_count: 5),
+    user: User.all.sample,
+    category: Category.all.sample
+  )
 end
+
+puts "Seeded posts"
+
+puts 'Seeding answers...'
+
+10.times do
+  Answer.create!(
+    content: Faker::Lorem.paragraph(sentence_count: 2),
+    post: Post.all.sample,
+    user: User.all.sample
+  )
+end
+
+puts 'Answers seeded'
