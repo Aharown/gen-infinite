@@ -23,20 +23,6 @@
         <%= form.collection_select :category_id, Category.all, :id, :title, { prompt: "Select a Category" }, class: "form-control" %>
       </div>
 
-      <!-- Display existing photos -->
-      <% if @post.photos.attached? %>
-        <div class="existing-photos">
-          <h4>Existing Photos:</h4>
-          <% @post.photos.each do |photo| %>
-            <div class="photo">
-              <%= cl_image_tag photo.key, alt: @post.title, class: 'post-image-form' %>
-              <%= check_box_tag "remove_photos[]", photo.id %>
-              <%= label_tag "remove_photos_#{photo.id}", "Remove this photo" %>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
-
       <!-- File Uploads -->
       <div class="form-group">
         <%= form.label :photos, "Upload Photos (optional)" %>
