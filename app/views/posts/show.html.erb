@@ -1,0 +1,36 @@
+<!-- app/views/posts/show.html.erb -->
+
+<div class="post-category">
+  <h2><%= @post.category.name %></h2>
+</div>
+
+<div class="post-header">
+  <h1><%= @post.title %></h1>
+  <p><%= @post.user.username %></p>
+</div>
+
+<div class="post-content">
+  <p><%= @post.content %></p>
+</div>
+
+<% if @post.photos.attached? %>
+  <div class="post-photos">
+    <% @post.photos.each do |photo| %>
+      <%= image_tag photo, class: "post-photo" %>
+    <% end %>
+  </div>
+<% end %>
+
+<div class="answers-section">
+  <h3>Responses</h3>
+  <% @answers.each do |answer| %>
+    <div class="answer">
+      <div class="answer-user">
+        <strong><%= answer.user.username %></strong> says:
+      </div>
+      <div class="answer-content">
+        <p><%= answer.content %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
