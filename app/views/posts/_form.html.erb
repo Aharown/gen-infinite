@@ -4,7 +4,7 @@
       <h2><%= mode %></h2>
     </div>
 
-    <%= form_with(model: @post, local: true, html: { multipart: true }) do |form| %>
+    <%= simple_form_for(@post, html: { multipart: true }) do |form| %>
       <div class="form-group">
         <h4><%= form.label :title, "Title" %></h4>
         <%= form.text_field :title, class: "form-control", placeholder: "Enter the post title" %>
@@ -22,7 +22,8 @@
 
       <div class="form-group">
         <%= form.label :photos, "Upload Photos (optional)" %>
-        <%= form.file_field :photos, multiple: true, class: "form-control", id: "post_photos" %>
+        <%= form.input :photos, as: :file, input_html: { multiple: true } %>
+        <%#= form.file_field :photos, multiple: true, class: "form-control", id: "post_photos" %>
         <small class="form-text text-muted">You can upload up to 4 photos for your post.</small>
       </div>
 
