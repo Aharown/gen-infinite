@@ -14,20 +14,7 @@ require 'faker'
 User.destroy_all
 Post.destroy_all
 Answer.destroy_all
-
-puts 'Seeding users...'
-
-5.times do
-  User.create!(
-    username: Faker::Internet.username(specifier: 5..8),
-    password: "password",
-    email: Faker::Internet.email,
-    intro: "A passionate #{Faker::Job.title.downcase} with a keen interest in #{Faker::Hobby.activity.downcase} and #{Faker::Educator.subject.downcase}.",
-    bio: Faker::Quote.famous_last_words
-  )
-end
-
-puts 'Seeded users'
+Category.destroy_all
 
 puts "Seeding categories..."
 
@@ -51,6 +38,22 @@ categories.each do |category_name|
 end
 
 puts "Seeded categories"
+
+puts 'Seeding users...'
+
+5.times do
+  user = User.create!(
+    username: Faker::Internet.username(specifier: 5..8),
+    password: "password",
+    email: Faker::Internet.email,
+    intro: "A passionate #{Faker::Job.title.downcase} with a keen interest in #{Faker::Hobby.activity.downcase} and #{Faker::Educator.subject.downcase}.",
+    bio: Faker::Quote.famous_last_words
+  )
+
+  user.categories_of_interest = Category.all.sample(rand(2..5))
+end
+
+puts 'Seeded users'
 
 puts "Seeding posts..."
 

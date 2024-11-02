@@ -2,7 +2,13 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
-    @posts = Post.all
+    if params[:category_id]
+      @posts = Post.where(category_id: params[:category_id])
+    else
+      @posts = Post.joins(:category)
+                   .where(categories: { id: current_user.categories_of_interest })
+                   .distinct
+    end
   end
 
    def show
