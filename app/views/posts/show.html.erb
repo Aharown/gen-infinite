@@ -4,6 +4,8 @@
   <h2><%= @post.category.name %></h2>
 </div>
 
+<%= link_to 'Edit post', edit_post_path(@post), class: "rent-button" %>
+
 <div class="post-header">
   <h1><%= @post.title %></h1>
   <p><%= @post.user.username %></p>

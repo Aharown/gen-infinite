@@ -1,6 +1,7 @@
 <div class="form-main-styles-container">
   <div class="form-container-grid">
     <div class="header">
+      <h2><%= mode %></h2>
     </div>
 
     <%= form_with(model: @post, local: true, html: { multipart: true }) do |form| %>
@@ -28,7 +29,7 @@
       <div id="preview-container" class="photo-preview"></div>
 
       <div class="form-group-button">
-        <%= form.submit (@post.persisted? ? "Save changes" : "Post"), class: "btn btn-primary" %>
+        <%= form.submit (@post.persisted? ? "Update post" : "Create post"), class: "btn btn-primary" %>
       </div>
     <% end %>
   </div>
