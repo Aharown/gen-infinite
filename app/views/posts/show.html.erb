@@ -20,7 +20,7 @@
 <% if @post.photos.attached? %>
   <div class="post-photos">
     <% @post.photos.each do |photo| %>
-      <%= image_tag photo, class: "post-photo" %>
+      <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
     <% end %>
   </div>
 <% end %>
