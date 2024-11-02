@@ -11,9 +11,11 @@ class PostsController < ApplicationController
     end
   end
 
-   def show
-    @answers = @post.answers.includes(:user)
+  def show
+    @answers = @post.answers.order(created_at: :asc)
+    @new_answer = Answer.new 
   end
+
 
   def new
     @post = Post.new

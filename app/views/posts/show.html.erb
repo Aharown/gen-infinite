@@ -26,7 +26,15 @@
 <% end %>
 
 <div class="answers-section">
-  <h3>Responses</h3>
+
+  <%= form_with(model: [@post, @new_answer], local: true) do |form| %>
+    <div class="form-group">
+      <%= form.label :content, "Add a comment" %>
+      <%= form.text_area :content, rows: 4, class: "form-control" %>
+    </div>
+    <%= form.submit "Comment", class: "submit-answer-button" %>
+  <% end %>
+
   <% @answers.each do |answer| %>
     <div class="answer">
       <div class="answer-user">
