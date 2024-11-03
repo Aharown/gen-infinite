@@ -13,32 +13,37 @@
 @import "pages/index";
 
 .form-group h4 {
-  font-size: 1.25rem; /* You can adjust this size as needed */
-  font-weight: bold;  /* Bold labels for emphasis */
-   /* Add spacing below the label */
+  font-size: 1.25rem;
+  font-weight: bold;
   margin-top: 30px;
   color: black;
 }
 
-.existing-photos h4 {
-  font-size: 1.25rem; /* You can adjust this size as needed */
-  font-weight: bold;  /* Bold labels for emphasis */
-   /* Add spacing below the label */
+.existing-media h4 {
+  font-size: 1.25rem;
+  font-weight: bold;
   margin-top: 30px;
   color: black;
 }
 
 .form-group-photos {
-  margin-top: 30px; /* Adjust the value as needed */
+  margin-top: 30px;
 }
 
 .form-group-button {
-  margin: 30px; /* Adjust the value as needed */
+  margin: 30px;
 }
 
 .post-image-form {
-  max-width: 150px; /* Set maximum width to make images smaller */
-  max-height: 150px; /* Set maximum height */
-  object-fit: cover; /* Ensure images maintain their aspect ratio */
-  margin: 10px; /* Add margin for spacing */
+  max-width: 150px;
+  max-height: 150px;
+  object-fit: cover;
+  margin: 10px;
+}
+
+.post-video-form {
+  max-width: 250px;
+  max-height: 250px;
+  object-fit: cover;
+  margin: 10px; 
 }
