@@ -27,6 +27,11 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save!
+      if params[:post][:media].present?
+        params[:post][:media].each do |media|
+          @post.photos.attach(media)
+        end
+      end
       redirect_to post_path(@post)
     else
       render :new, status: :unprocessable_entity
@@ -37,14 +42,14 @@ class PostsController < ApplicationController
   end
 
   def update
-    if params[:post][:photos].present?
-      params[:post][:photos].each do |photo|
-        @post.photos.attach(photo)
+    if params[:post][:media].present?
+      params[:post][:media].each do |media|
+        @post.photos.attach(media)
       end
     end
 
-    if params[:remove_photos].present?
-      params[:remove_photos].each do |photo_id|
+    if params[:remove_media].present?
+      params[:remove_media].each do |photo_id|
         @post.photos.find(photo_id).purge
       end
     end

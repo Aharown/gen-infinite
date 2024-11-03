@@ -21,23 +21,30 @@
       </div>
 
       <% if @post.photos.attached? %>
-        <div class="existing-photos">
-          <h4>Existing Photos:</h4>
-          <% @post.photos.each do |photo| %>
-            <div class="photo">
-              <%= cl_image_tag photo.key, class: 'post-image-form'%>
-              <%= check_box_tag "remove_photos[]", photo.id %>
-              <%= label_tag "remove_photos_#{photo.id}", "Remove this photo" %>
+        <div class="existing-media">
+          <h4>Existing Photos and Videos:</h4>
+          <% @post.photos.each do |media| %>
+            <div class="media-item">
+              <% if media.content_type.start_with?('image') %>
+                <%= cl_image_tag media.key, class: 'post-image-form' %>
+              <% elsif media.content_type.start_with?('video') %>
+                <video controls class="post-video-form">
+                  <source src="<%= media.url %>" type="<%= media.content_type %>">
+                  Your browser does not support the video tag.
+                </video>
+              <% end %>
+              <%= check_box_tag "remove_media[]", media.id %>
+              <%= label_tag "remove_media_#{media.id}", "Remove this photo or video" %>
             </div>
           <% end %>
         </div>
       <% end %>
 
       <div class="form-group">
-        <%= form.label :photos, "Upload Photos (optional)" %>
-        <%= form.input :photos, as: :file, input_html: { multiple: true } %>
+        <%= form.label :media, "Upload Photos or Videos (optional)" %>
+        <%= form.input :media, as: :file, input_html: { multiple: true, accept: "image/*,video/mp4" } %>
         <%#= form.file_field :photos, multiple: true, class: "form-control", id: "post_photos" %>
-        <small class="form-text text-muted">You can upload up to 4 photos for your post.</small>
+        <small class="form-text text-muted">You can upload up to 4 photos or videos for your post.</small>
       </div>
 
       <div id="preview-container" class="photo-preview"></div>
@@ -66,11 +73,17 @@ document.addEventListener('turbo:load', function() {
     selectedFiles.forEach(file => {
       const reader = new FileReader();
       reader.onload = function(e) {
-        const img = document.createElement('img');
-        img.src = e.target.result;
-        img.alt = file.name;
-        img.className = 'post-image';
-        previewContainer.appendChild(img);
+        let mediaElement;
+        if (file.type.startsWith("video")) {
+          mediaElement = document.createElement('video');
+          mediaElement.src = e.target.result;
+          mediaElement.controls = true;
+        } else if (file.type.startsWith("image")) {
+          mediaElement = document.createElement('img');
+          mediaElement.src = e.target.result;
+        }
+        mediaElement.className = 'post-media-preview';
+        previewContainer.appendChild(mediaElement);
       };
       reader.readAsDataURL(file);
     });
