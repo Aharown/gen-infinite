@@ -4,7 +4,15 @@
   <div class="post">
     <p><strong>Category:</strong> <%= post.category.name %></p>
     <p><strong>Posted by:</strong> <%= post.user.username %></p>
-    <h2><%= link_to post.title, post_path(post) %></h2>
+    <h2><%= link_to post.title, post_path(post) %></h2> | <%= post.created_at.strftime("%B %d, %Y") %></p>
     <p><%= post.content %></p>
+
+    <% if post.photos.attached? %> <!-- Check if the post has photos attached -->
+      <div class="post-photos">
+        <% post.photos.each do |photo| %>
+          <%= cl_image_tag photo.key, height: 200, width: 300, crop: :fill %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 <% end %>
