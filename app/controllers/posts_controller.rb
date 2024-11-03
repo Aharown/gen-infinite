@@ -1,19 +1,22 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user!, only: [:edit, :update, :destroy]
+
 
   def index
     if params[:category_id]
-      @posts = Post.where(category_id: params[:category_id])
+      @posts = Post.where(category_id: params[:category_id]).order(created_at: :desc)
     else
       @posts = Post.joins(:category)
                    .where(categories: { id: current_user.categories_of_interest })
                    .distinct
+                   .order(created_at: :desc)
     end
   end
 
   def show
     @answers = @post.answers.order(created_at: :asc)
-    @new_answer = Answer.new 
+    @new_answer = Answer.new
   end
 
 
@@ -57,6 +60,12 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:id])
+  end
+
+  def authorize_user!
+    unless @post.user == current_user
+      redirect_to posts_path, alert: "You are not authorized to perform this action."
+    end
   end
 
   def set_comment
