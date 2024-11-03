@@ -37,7 +37,19 @@ class PostsController < ApplicationController
   end
 
   def update
-    if @post.update(post_params)
+    if params[:post][:photos].present?
+      params[:post][:photos].each do |photo|
+        @post.photos.attach(photo)
+      end
+    end
+
+    if params[:remove_photos].present?
+      params[:remove_photos].each do |photo_id|
+        @post.photos.find(photo_id).purge
+      end
+    end
+
+    if @post.update(post_params.except(:photos))
       redirect_to @post, notice: "Post has been updated ✅."
     else
       render :edit, status: :unprocessable_entity
