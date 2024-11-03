@@ -20,6 +20,19 @@
         <%= form.collection_select :category_id, Category.all, :id, :name, { prompt: "Select a Category" }, class: "form-control" %>
       </div>
 
+      <% if @post.photos.attached? %>
+        <div class="existing-photos">
+          <h4>Existing Photos:</h4>
+          <% @post.photos.each do |photo| %>
+            <div class="photo">
+              <%= cl_image_tag photo.key, class: 'post-image-form'%>
+              <%= check_box_tag "remove_photos[]", photo.id %>
+              <%= label_tag "remove_photos_#{photo.id}", "Remove this photo" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
       <div class="form-group">
         <%= form.label :photos, "Upload Photos (optional)" %>
         <%= form.input :photos, as: :file, input_html: { multiple: true } %>
@@ -35,6 +48,8 @@
     <% end %>
   </div>
 </div>
+
+
 <script>
 document.addEventListener('turbo:load', function() {
   const photoInput = document.getElementById('post_photos');
