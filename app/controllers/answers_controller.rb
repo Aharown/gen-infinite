@@ -10,13 +10,17 @@ class AnswersController < ApplicationController
   end
 
   def create
-    @answer = current_user.answer.build(answer_params)
-    if @garment.save
-      redirect_to post_path
+    @post = Post.find(params[:post_id])
+    @answer = @post.answers.build(answer_params)
+    @answer.user = current_user
+
+    if @answer.save
+      redirect_to post_path(@post)
     else
-      render :new, status: :unprocessable_entity
+      redirect_to post_path(@post), alert: 'Failed to add comment.'
     end
   end
+
 
   def edit
   end

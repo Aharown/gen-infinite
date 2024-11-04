@@ -1,0 +1,92 @@
+<div class="form-main-styles-container">
+  <div class="form-container-grid">
+    <div class="header">
+      <h2><%= mode %></h2>
+    </div>
+
+    <%= simple_form_for(@post, html: { multipart: true }) do |form| %>
+      <div class="form-group">
+        <h4><%= form.label :title, "Title" %></h4>
+        <%= form.text_field :title, class: "form-control", placeholder: "Enter the post title" %>
+      </div>
+
+      <div class="form-group">
+        <h4><%= form.label :content, "Content" %></h4>
+        <%= form.text_area :content, class: "form-control", rows: 3, placeholder: "Share your knowledge/questions" %>
+      </div>
+
+      <div class="form-group">
+        <h4><%= form.label :category_id, "Category" %></h4>
+        <%= form.collection_select :category_id, Category.all, :id, :name, { prompt: "Select a Category" }, class: "form-control" %>
+      </div>
+
+      <% if @post.photos.attached? %>
+        <div class="existing-media">
+          <h4>Existing Photos and Videos:</h4>
+          <% @post.photos.each do |media| %>
+            <div class="media-item">
+              <% if media.content_type.start_with?('image') %>
+                <%= cl_image_tag media.key, class: 'post-image-form' %>
+              <% elsif media.content_type.start_with?('video') %>
+                <video controls class="post-video-form">
+                  <source src="<%= media.url %>" type="<%= media.content_type %>">
+                  Your browser does not support the video tag.
+                </video>
+              <% end %>
+              <%= check_box_tag "remove_media[]", media.id %>
+              <%= label_tag "remove_media_#{media.id}", "Remove this photo or video" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= form.label :media, "Upload Photos or Videos (optional)" %>
+        <%= form.input :media, as: :file, input_html: { multiple: true, accept: "image/*,video/mp4" } %>
+        <%#= form.file_field :photos, multiple: true, class: "form-control", id: "post_photos" %>
+        <small class="form-text text-muted">You can upload up to 4 photos or videos for your post.</small>
+      </div>
+
+      <div id="preview-container" class="photo-preview"></div>
+
+      <div class="form-group-button">
+        <%= form.submit (@post.persisted? ? "Update post" : "Create post"), class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+<script>
+document.addEventListener('turbo:load', function() {
+  const photoInput = document.getElementById('post_photos');
+  const previewContainer = document.getElementById('preview-container');
+
+  photoInput.addEventListener('change', function(event) {
+    const files = Array.from(event.target.files);
+
+    previewContainer.innerHTML = '';
+
+    const maxFiles = 4;
+    const selectedFiles = files.slice(0, maxFiles);
+
+    selectedFiles.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        let mediaElement;
+        if (file.type.startsWith("video")) {
+          mediaElement = document.createElement('video');
+          mediaElement.src = e.target.result;
+          mediaElement.controls = true;
+        } else if (file.type.startsWith("image")) {
+          mediaElement = document.createElement('img');
+          mediaElement.src = e.target.result;
+        }
+        mediaElement.className = 'post-media-preview';
+        previewContainer.appendChild(mediaElement);
+      };
+      reader.readAsDataURL(file);
+    });
+  });
+});
+</script>
