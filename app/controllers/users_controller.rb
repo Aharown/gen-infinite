@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @posts = @user.posts.order(created_at: :desc)
   end
 
   def update
@@ -20,4 +21,12 @@ class UsersController < ApplicationController
     params.require(:user).permit(:username, :email, :password, category_ids: [])
   end
 
+end
+
+private
+
+def set_user
+  @user = User.select(:id, :username, :intro, :bio)
+              .includes(:posts)
+              .find(params[:id])
 end

@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user!, only: [:edit, :update, :destroy]
-
+  before_action :set_post, only: %i[show edit update destroy]
+  before_action :authorize_user!, only: %i[edit update destroy]
+  before_action :find_post, only: %i[show upvote downvote]
 
   def index
     if params[:category_id]
@@ -15,10 +15,15 @@ class PostsController < ApplicationController
   end
 
   def show
+    begin
+      @post = Post.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:alert] = "Post not found"
+      redirect_to posts_path
+    end
     @answers = @post.answers.order(created_at: :asc)
     @new_answer = Answer.new
   end
-
 
   def new
     @post = Post.new
@@ -27,6 +32,11 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save!
+      if params[:post][:media].present?
+        params[:post][:media].each do |media|
+          @post.photos.attach(media)
+        end
+      end
       redirect_to post_path(@post)
     else
       render :new, status: :unprocessable_entity
@@ -37,7 +47,19 @@ class PostsController < ApplicationController
   end
 
   def update
-    if @post.update(post_params)
+    if params[:post][:media].present?
+      params[:post][:media].each do |media|
+        @post.photos.attach(media)
+      end
+    end
+
+    if params[:remove_media].present?
+      params[:remove_media].each do |photo_id|
+        @post.photos.find(photo_id).purge
+      end
+    end
+
+    if @post.update(post_params.except(:photos))
       redirect_to @post, notice: "Post has been updated ✅."
     else
       render :edit, status: :unprocessable_entity
@@ -50,6 +72,18 @@ class PostsController < ApplicationController
     else
       redirect_to posts_path, alert: "Failed to delete the post 🛑."
     end
+  end
+
+  def upvote
+    @post = Post.find(params[:id])
+    @post.liked_by(current_user)
+    redirect_to @post, notice: "You upvoted this post"
+  end
+
+  def downvote
+    @post = Post.find(params[:id])
+    @post.unliked_by(current_user)
+    redirect_to @post, notice: "You downvoted this post"
   end
 
   private
@@ -70,5 +104,9 @@ class PostsController < ApplicationController
 
   def set_comment
     @comment = Comment.find(params[:id])
+  end
+
+  def find_post
+    @post = Post.find(params[:id])
   end
 end
