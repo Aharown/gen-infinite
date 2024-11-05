@@ -21,7 +21,6 @@ class AnswersController < ApplicationController
     end
   end
 
-
   def edit
   end
 
@@ -38,6 +37,16 @@ class AnswersController < ApplicationController
     end
   end
 
+  def upvote
+    @answer.liked_by(current_user)
+    redirect_to @answer.post
+  end
+
+  def downvote
+    @post.unliked_by(current_user)
+    redirect_to @answer.post
+  end
+
   private
 
   def answer_params
@@ -48,4 +57,7 @@ class AnswersController < ApplicationController
     @answer = Answer.find(params[:id])
   end
 
+  def find_answer
+    @answer = Answer.find(params[:id])
+  end
 end

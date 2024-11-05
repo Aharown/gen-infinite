@@ -21,21 +21,31 @@
 <% if @post.photos.attached? %>
   <div class="post-media">
     <% @post.photos.each do |media| %>
-      <% if media.content_type.start_with?('image') %>
-        <%= cl_image_tag media.key, height: 300, width: 400, crop: :fill, class: 'post-image' %>
-      <% elsif media.content_type.start_with?('video') %>
+    <% if media.content_type.start_with?('image') %>
+    <%= cl_image_tag media.key, height: 300, width: 400, crop: :fill, class: 'post-image' %>
+    <% elsif media.content_type.start_with?('video') %>
 
-        <video controls height="300" width="400" class="post-video">
-          <source src="<%= media.url %>" type="<%= media.content_type %>">
-          Your browser does not support the video tag.
-        </video>
+    <video controls height="300" width="400" class="post-video">
+    <source src="<%= media.url %>" type="<%= media.content_type %>">
+    Your browser does not support the video tag.
+
+      </video>
       <% end %>
     <% end %>
   </div>
 <% end %>
 
-<div class="answers-section">
+<div class="vote-section">
+  <%= simple_form_for :vote, url: upvote_post_path(@post), method: :post do |f| %>
+  <%= button_to 'Upvote', upvote_post_path(@post), method: :post, class: 'btn btn-success' %>
+  <% end %>
+  <%= simple_form_for :vote, url: downvote_post_path(@post), method: :post do |f| %>
+  <%= button_to 'Downvote', downvote_post_path(@post), method: :post, class: 'btn btn-danger' %>
+  <p>Votes: <%= @post.get_upvotes.size %></p>
+  <% end %>
+</div>
 
+<div class="answers-section">
   <%= form_with(model: [@post, @new_answer], local: true) do |form| %>
     <div class="form-group">
       <%= form.label :content, "Add a comment" %>
