@@ -2,6 +2,7 @@
 <h1><%= @user.username %></h1>
 <h2><%= @user.intro %></h2>
 <h3><%= @user.bio %></h3>
+
 <% if @posts.any? %>
   <% @posts.each do |post| %>
     <div class="post">
@@ -10,6 +11,7 @@
       <h2><%= link_to post.title, post_path(post) %></h2>
       <p><%= post.created_at.strftime("%B %d, %Y") %></p>
       <p><%= post.content %></p>
+
       <% if post.photos.attached? %> <!-- Display any photos attached to the post -->
         <div class="post-media">
           <% post.photos.each do |media| %>
@@ -20,14 +22,11 @@
                 <source src="<%= media.url %>" type="<%= media.content_type %>">
                 Your browser does not support the video tag.
               </video>
-                </div>
-                </div>
-                <% end %>
             <% end %>
           <% end %>
-        </div>
+        </div> <!-- Close post-media div here -->
       <% end %>
-    </div>
+    </div> <!-- Close post div here -->
   <% end %>
 <% else %>
   <p>This user has not posted anything yet.</p>
