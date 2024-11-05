@@ -7,7 +7,7 @@
     <h2><%= link_to post.title, post_path(post) %></h2> | <%= post.created_at.strftime("%B %d, %Y") %></p>
     <p><%= post.content %></p>
 
-    <% if post.photos.attached? %> <!-- Check if the post has photos attached -->
+    <% if post.photos.attached? %> 
       <div class="post-media">
         <% post.photos.each do |media| %>
           <% if media.content_type.start_with?('image') %>
