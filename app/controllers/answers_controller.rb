@@ -26,7 +26,11 @@ class AnswersController < ApplicationController
   end
 
   def update
-    @answer = Answer.find(params[:id])
+    if @answer.update(answer_params)
+      redirect_to post_path(@answer.post), notice: "Comment has been updated ✅."
+    else
+      redirect_to post_path(@answer.post), alert: 'Failed to update comment.'
+    end
   end
 
   def destroy
