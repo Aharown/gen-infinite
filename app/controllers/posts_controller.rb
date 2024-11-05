@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user!, only: [:edit, :update, :destroy]
-
+  before_action :set_post, only: %i[show edit update destroy]
+  before_action :authorize_user!, only: %i[edit update destroy]
+  before_action :find_post, only: %i[show upvote downvote]
 
   def index
     if params[:category_id]
@@ -15,10 +15,15 @@ class PostsController < ApplicationController
   end
 
   def show
+    begin
+      @post = Post.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      flash[:alert] = "Post not found"
+      redirect_to posts_path
+    end
     @answers = @post.answers.order(created_at: :asc)
     @new_answer = Answer.new
   end
-
 
   def new
     @post = Post.new
@@ -69,6 +74,18 @@ class PostsController < ApplicationController
     end
   end
 
+  def upvote
+    @post = Post.find(params[:id])
+    @post.liked_by(current_user)
+    redirect_to @post, notice: "You upvoted this post"
+  end
+
+  def downvote
+    @post = Post.find(params[:id])
+    @post.unliked_by(current_user)
+    redirect_to @post, notice: "You downvoted this post"
+  end
+
   private
 
   def post_params
@@ -87,5 +104,9 @@ class PostsController < ApplicationController
 
   def set_comment
     @comment = Comment.find(params[:id])
+  end
+
+  def find_post
+    @post = Post.find(params[:id])
   end
 end

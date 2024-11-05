@@ -52,6 +52,7 @@ gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem "cloudinary"
+gem 'acts_as_votable', '~> 0.12.0'
 
 group :development, :test do
   gem "faker"
