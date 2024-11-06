@@ -45,5 +45,29 @@
   max-width: 250px;
   max-height: 250px;
   object-fit: cover;
-  margin: 10px; 
+  margin: 10px;
+}
+
+/* application.scss */
+
+/* Custom styles for the vote button */
+.custom-vote-button {
+  font-weight: bold;
+  padding: 4px 4px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.custom-vote-button.upvote {
+  background-color: hsl(120, 1%, 30%);
+  color: white;
+}
+
+.custom-vote-button.downvote {
+  background-color: hsl(120, 1%, 30%);
+  color: white;
+}
+
+.custom-vote-button:hover {
+  background-color: darken(hsl(120, 1%, 30%), 10%);
 }

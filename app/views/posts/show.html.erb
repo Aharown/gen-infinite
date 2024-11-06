@@ -35,14 +35,18 @@
   </div>
 <% end %>
 
-<div class="vote-section">
-  <%= simple_form_for :vote, url: upvote_post_path(@post), method: :post do |f| %>
-  <%= button_to 'Upvote', upvote_post_path(@post), method: :post, class: 'btn btn-success' %>
-  <% end %>
-  <%= simple_form_for :vote, url: downvote_post_path(@post), method: :post do |f| %>
-  <%= button_to 'Downvote', downvote_post_path(@post), method: :post, class: 'btn btn-danger' %>
-  <p>Votes: <%= @post.get_upvotes.size %></p>
-  <% end %>
+<div class="vote-buttons d-flex align-items-center">
+  <!-- Upvote button and count -->
+  <div class="d-flex align-items-center me-3">
+    <%= button_to raw('<i class="fa fa-thumbs-up"></i>'), upvote_post_path(@post), method: :post, remote: true, class: 'custom-vote-button upvote' %>
+    <span id="upvote-count-<%= @post.id %>" class="ms-2"><%= @post.get_upvotes.size %></span>
+  </div>
+
+  <!-- Downvote button and count -->
+  <div class="d-flex align-items-center">
+    <%= button_to raw('<i class="fa fa-thumbs-down"></i>'), downvote_post_path(@post), method: :post, remote: true, class: 'custom-vote-button downvote' %>
+    <span id="downvote-count-<%= @post.id %>" class="ms-2"><%= @post.get_downvotes.size %></span>
+  </div>
 </div>
 
 <div class="answers-section">
