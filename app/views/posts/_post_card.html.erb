@@ -13,7 +13,7 @@
         <% post.photos.each do |media| %>
           <% if media.content_type.start_with?('image') %>
             <%= cl_image_tag media.key, height: 200, width: 300, crop: :fill, class: 'post-image' %>
-          <% elsif media.content_type.start_with?('video') %>
+          <% elsif media.content_type.start_with?('video') && media.url.present? %>
             <video controls height="200" width="300" class="post-video">
               <source src="<%= media.url %>" type="<%= media.content_type %>">
             </video>
