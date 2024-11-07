@@ -1,7 +1,10 @@
 <!-- app/views/users/show.html.erb -->
-<h1><%= @user.username %></h1>
-<h2><%= @user.intro %></h2>
-<h3><%= @user.bio %></h3>
+<h1 class="user-username"><%= @user.username %></h1>
+<h2 class="user-intro"><%= @user.intro %></h2>
+<hr> <!-- Line under intro -->
+
+<h3 class="user-bio"><%= @user.bio %></h3>
+<hr> <!-- Line under bio -->
 
 <% if @posts.any? %>
   <% @posts.each do |post| %>
@@ -27,6 +30,7 @@
         </div> <!-- Close post-media div here -->
       <% end %>
     </div> <!-- Close post div here -->
+    <hr> <!-- Line under each post -->
   <% end %>
 <% else %>
   <p>This user has not posted anything yet.</p>

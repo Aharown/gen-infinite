@@ -21,7 +21,7 @@ class PostsController < ApplicationController
       flash[:alert] = "Post not found"
       redirect_to posts_path
     end
-    @answers = @post.answers.order(created_at: :asc)
+    @answers = @post.answers.order(created_at: :desc)  # Order by newest first
     @new_answer = Answer.new
   end
 

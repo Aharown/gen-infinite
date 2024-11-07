@@ -6,7 +6,7 @@
     <p><%= display_user_with_photo(post.user) %></p>
     <h2><%= link_to post.title, post_path(post) %></h2>
     <p><%= post.created_at.strftime("%B %d, %Y") %></p>
-    <p><%= post.content %></p>
+    <p><%= truncate(post.content, length: 250, separator: ' ') %></p>
 
     <% if post.photos.attached? %>
       <div class="post-media">
