@@ -1,0 +1,16 @@
+.form-main-styles-container .form-control {
+  background-color: var(--input-background-color);
+  border: 1px solid var(--input-border-color);
+  color: var(--text-color); /* Text color for user's input */
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.form-main-styles-container .form-control::placeholder {
+  color: var(--placeholder-color); /* Placeholder color */
+}
+
+.form-main-styles-container .form-text.text-muted {
+  color: var(--text-color) !important;
+}
+

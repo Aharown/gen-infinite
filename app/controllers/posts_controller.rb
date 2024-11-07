@@ -10,7 +10,7 @@ class PostsController < ApplicationController
       @posts = Post.joins(:category)
                    .where(categories: { id: current_user.categories_of_interest })
                    .distinct
-                   .order(created_at: :desc)
+                   .order(created_at: :desc).limit(7)
     end
   end
 
