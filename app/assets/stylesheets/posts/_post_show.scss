@@ -1,0 +1,40 @@
+/* Form controls */
+.form-control {
+  background-color: var(--input-background-color);  /* Background color */
+  color: var(--text-color);                    /* Text color */
+  border: 1px solid var(--input-border-color);       /* Border color */
+  border-radius: 17px;
+}
+
+.form-control::placeholder {
+  color: var(--placeholder-color);
+}
+
+/* Add space between the comment input field and the buttons */
+.form-group {
+  margin-bottom: 10px; /* This adds space below the comment text area */
+}
+
+.form-buttons {
+  margin-top: 5px; /* This adds space above the buttons */
+  margin-bottom: 8px;
+}
+
+/* Optional: Add margin to the buttons themselves for more space */
+.btn-primary {
+  margin-right: 5px; /* Adds space between buttons */
+  margin-bottom: 5px; /* This adds space below the comment text area */
+}
+
+/* Ensure the buttons are displayed horizontally */
+.answer-actions {
+  display: flex; /* Use flexbox to align the buttons horizontally */
+  gap: 10px; /* Adds space between the buttons */
+  padding-bottom: 5px;
+}
+
+/* Optional: If you need to style the buttons to look aligned or consistent */
+.edit-answer-button, .delete-answer-button {
+  display: inline-block;
+  margin: 0; /* Remove default margins if necessary */
+}

@@ -1,38 +1,79 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-    <%= link_to "#", class: "navbar-brand" do %>
-      <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
-    <% end %>
+    <div class="navbar-inner"> <!-- Flexbox container -->
+      <!-- Logo -->
+      <%= link_to posts_path, class: "d-flex align-items-center" do %>
+        <span class="navbar-brand-name">GI</span>
+        <i class="fa-solid fa-infinity" style="font-size: 30px;"></i>
+      <% end %>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
-        <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Home", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Messages", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item dropdown">
-          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
-          </a>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
-            </div>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-          </li>
+      <!-- Search Bar -->
+      <div class="search-container">
+        <%= simple_form_for :search, url: posts_path, method: :get do |f| %>
+          <div class="search-form-control form-group">
+            <input class="form-control string required" type="text" name="search[query]" id="search_query" placeholder="Search for..." />
+            <button name="button" type="submit" class="btn btn-ghost">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
         <% end %>
-      </ul>
+      </div>
+
+      <div class="navbar-icons">
+        <!-- Categories Icon -->
+        <div class="dropdown">
+          <button class="btn btn-ghost" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-th-list" style="font-size: 24px;"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <% @categories.each do |category| %>
+              <li>
+                <%= link_to category_path(category), class: "dropdown-item" do %>
+                  <%= category.name %>  <!-- Display only the category name -->
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+
+        <%= link_to new_post_path, class: "btn btn-ghost" do %>
+          <i class="fa-solid fa-plus" style="font-size: 24px;"></i>
+        <% end %>
+
+        <div class="dropdown">
+          <button class="btn btn-ghost" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user-circle" style="font-size: 24px;"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end custom-dropdown">
+            <% if user_signed_in? %>
+              <%= link_to "Your profile", user_path(current_user), class: "dropdown-item" %>
+              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+            <% else %>
+              <%= link_to "Log in", new_user_session_path, class: "dropdown-item" %>
+              <%= link_to "Sign up", new_user_registration_path, class: "dropdown-item" %>
+            <% end %>
+            <li>
+              <button id="theme-toggle-button" class="dropdown-item">
+                <i id="theme-icon" class="fas fa-moon" style="font-size: 18px;"></i> Toggle
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+
+<script>
+  // Function to toggle search bar visibility
+  function toggleSearchBar() {
+    var searchBar = document.getElementById('searchBar');
+    searchBar.classList.toggle('active');
+  }
+
+  function selectCategoryAndSubmit(categoryId) {
+    document.getElementById('category').value = categoryId;
+    document.getElementById('categoryForm').submit();
+  }
+</script>
