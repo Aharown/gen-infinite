@@ -219,3 +219,24 @@ body {
 .icon {
   color: var(--icon-hover-color);
 }
+
+.custom-vote-button {
+  font-weight: bold;
+  padding: 4px 4px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.custom-vote-button.upvote {
+  background-color: hsl(120, 1%, 30%);
+  color: white;
+}
+
+.custom-vote-button.downvote {
+  background-color: hsl(120, 1%, 30%);
+  color: white;
+}
+
+.custom-vote-button:hover {
+  background-color: darken(hsl(120, 1%, 30%), 10%);
+}
