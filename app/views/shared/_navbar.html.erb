@@ -53,8 +53,8 @@
               <%= link_to "Sign up", new_user_registration_path, class: "dropdown-item" %>
             <% end %>
             <li>
-              <button id="theme-toggle-button" class="dropdown-item">
-                <i id="theme-icon" class="fas fa-moon" style="font-size: 18px;"></i> Toggle
+              <button id="theme-toggle-button" class="dropdown-item" data-controller="toggle-theme" data-action="click->toggle-theme#toggleDarkMode">
+                <i id="theme-icon" class="fas fa-moon" style="font-size: 18px;" data-toggle-theme-target="icon"></i> Toggle
               </button>
             </li>
           </ul>
@@ -63,17 +63,3 @@
     </div>
   </div>
 </div>
-
-
-<script>
-  // Function to toggle search bar visibility
-  function toggleSearchBar() {
-    var searchBar = document.getElementById('searchBar');
-    searchBar.classList.toggle('active');
-  }
-
-  function selectCategoryAndSubmit(categoryId) {
-    document.getElementById('category').value = categoryId;
-    document.getElementById('categoryForm').submit();
-  }
-</script>
