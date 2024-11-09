@@ -77,9 +77,10 @@ class PostsController < ApplicationController
   def upvote
     @post = Post.find(params[:id])
     @post.liked_by(current_user)
+
     respond_to do |format|
+      format.json { render json: { upvotes: @post.get_upvotes.size } }
       format.html { redirect_to @post }
-      format.js
     end
   end
 
@@ -87,8 +88,8 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.unliked_by(current_user)
     respond_to do |format|
+      format.json { render json: { downvotes: @post.get_downvotes.size } }
       format.html { redirect_to @post }
-      format.js
     end
   end
 
