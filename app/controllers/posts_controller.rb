@@ -22,6 +22,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @tags = @post.category ? @post.category.tags : []
   end
 
   def create
@@ -72,11 +73,12 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :content, :category_id, photos: [])
+    params.require(:post).permit(:title, :content, :category_id, photos: [], tag_ids: [])
   end
 
   def set_post
     @post = Post.find(params[:id])
+    @tags = @post.category ? @post.category.tags : []
   end
 
   def authorize_user!
