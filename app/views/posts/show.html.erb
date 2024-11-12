@@ -5,13 +5,15 @@
 </div>
 
 <% if @post.user == current_user %>
-  <%= link_to 'Edit post', edit_post_path(@post), class: "edit-button" %>
-  <%= button_to 'Delete post', post_path(@post), method: :delete, data: { confirm: 'Are you sure you want to delete this post?' }, class: "delete-button" %>
+  <div class="answer-actions">
+    <%= link_to 'Edit post', edit_post_path(@post), class: "btn-primary" %>
+    <%= button_to 'Delete post', post_path(@post), method: :delete, data: { confirm: 'Are you sure you want to delete this post?' }, class: "btn-primary" %>
+  </div>
 <% end %>
 
 <div class="post-header">
   <h1><%= @post.title %></h1>
-  <p><%= @post.user.username %></p>
+  <p><%= link_to_user(@post.user) %></p>
 </div>
 
 <div class="post-content">
@@ -34,8 +36,33 @@
   </div>
 <% end %>
 
-<div class="answers-section">
+<div class="vote-buttons d-flex align-items-center" data-controller="vote">
+  <!-- Upvote button and count -->
+  <div class="d-flex align-items-center me-3">
+    <%= button_to raw('<i class="fa fa-thumbs-up"></i>'),
+      upvote_post_path(@post),
+      method: :post,
+      remote: true,
+      class: 'custom-vote-button upvote',
+      data: { action: "vote#upvote" }
+    %>
+    <span id="upvote-count-<%= @post.id %>" class="ms-2" data-vote-target="upvoteCount"><%= @post.get_upvotes.size %></span>
+  </div>
 
+  <!-- Downvote button and count -->
+  <div class="d-flex align-items-center">
+    <%= button_to raw('<i class="fa fa-thumbs-down"></i>'),
+      downvote_post_path(@post),
+      method: :post,
+      remote: true,
+      class: 'custom-vote-button downvote',
+      data: { action: "vote#downvote" }
+    %>
+    <span id="downvote-count-<%= @post.id %>" class="ms-2" data-vote-target="downvoteCount"><%= @post.get_downvotes.size %></span>
+  </div>
+</div>
+
+<div class="answers-section" id="answers">
   <%= form_with(model: [@post, @new_answer], local: true) do |form| %>
     <div class="form-group">
       <%= form.label :content, "Add a comment" %>
@@ -44,24 +71,55 @@
 
 
     <div class="form-buttons">
-      <%= form.submit "Comment", class: "submit-answer-button" %>
-      <%= button_to "Clear", "#", method: :get, class: "clear-answer-button", onclick: "event.preventDefault(); document.querySelector('.form-control').value = '';" %>
+      <%= form.submit "Comment", class: "btn-primary" %>
+      <%= button_to "Clear", "#", method: :get, class: "btn-primary", onclick: "event.preventDefault(); document.querySelector('.form-control').value = '';" %>
     </div>
   <% end %>
-
 
   <% @answers.each do |answer| %>
     <div class="answer">
       <div class="answer-user">
-        <strong><%= answer.user.username %></strong> says:
+        <strong><%= answer.user.username %></strong>
       </div>
       <div class="answer-content">
         <p><%= answer.content %></p>
       </div>
 
       <% if answer.user == current_user %>
-        <%= button_to "Delete", post_answer_path(@post, answer), method: :delete, data: { confirm: "Are you sure you want to delete this comment?" }, class: "delete-answer-button" %>
+      <div class="answer-actions">
+        <%= button_to "Edit", "#", class: "btn-primary", data: { answer_id: answer.id }, method: :get %>
+        <%= button_to "Delete", post_answer_path(@post, answer), method: :delete, data: { confirm: "Are you sure you want to delete this comment?" }, class: "btn-primary" %>
+      </div>
+        <div class="edit-answer-form" id="edit-answer-form-<%= answer.id %>" style="display: none;">
+          <%= form_with(model: [@post, answer], local: true) do |form| %>
+            <div class="form-group">
+              <%= form.label :content, "Edit your comment" %>
+              <%= form.text_area :content, rows: 2, class: "form-control", value: answer.content %>
+            </div>
+            <div class="form-buttons">
+              <%= form.submit "Update", class: "btn-primary" %>
+              <%= button_to "Cancel", "#", class: "btn-primary", data: { answer_id: answer.id }, method: :get, onclick: "event.preventDefault();" %>
+            </div>
+          <% end %>
+        </div>
       <% end %>
     </div>
   <% end %>
-</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Add event listeners to each edit button (whether link or button)
+  document.querySelectorAll('.edit-answer-button').forEach(button => {
+    button.addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent the default form submission
+      const answerId = this.dataset.answer_id; // Get the answer ID from data attribute
+      const answerContent = document.getElementById(`answer-content-${answerId}`);
+      const editForm = document.getElementById(`edit-answer-form-${answerId}`);
+
+      // Toggle visibility
+      answerContent.style.display = answerContent.style.display === 'none' ? 'block' : 'none';
+      editForm.style.display = editForm.style.display === 'none' ? 'block' : 'none';
+    });
+  });
+});
+</script>

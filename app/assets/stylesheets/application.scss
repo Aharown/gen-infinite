@@ -11,6 +11,34 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+@import "posts/index";
+@import "posts/post_show";
+@import "components/navbar";
+@import "post_form";
+@import 'users';
+
+.main-wrapper {
+  padding-top: 85px;
+  min-height: calc(100vh - 80px);
+  padding-bottom: 40px;
+  padding-left: 15px;
+  padding-right: 10px;
+}
+
+.btn-primary {
+  color: var(--btn-text-color);              /* Text color based on mode */
+  border: 1px solid var(--btn-border-color); /* Border color based on mode */
+  background-color: var(--btn-background-color); /* Transparent background */
+  padding: 8px 24px;
+  border-radius: 50px;
+  font-weight: lighter;
+  opacity: 0.6;
+  transition: opacity 0.3s ease, color 0.3s ease, border 0.3s ease;
+
+  &:hover {
+    opacity: 1; /* Make the button fully visible on hover */
+  }
+}
 
 .form-group h4 {
   font-size: 1.25rem;
@@ -45,5 +73,171 @@
   max-width: 250px;
   max-height: 250px;
   object-fit: cover;
-  margin: 10px; 
+  margin: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit; /* Optional: This ensures the text color matches the surrounding text */
+}
+
+.roboto-thin {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.roboto-light {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.roboto-regular {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.roboto-medium {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.roboto-bold {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.roboto-black {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.roboto-thin-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.roboto-light-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.roboto-regular-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.roboto-medium-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.roboto-bold-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.roboto-black-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+/* Light Mode (default) */
+:root {
+  --background-color: #F7F7F7;  /* Light background */
+  --text-color: #414A4C;        /* Dark text */
+  --icon-color: #808080;        /* Dark icons */
+  --navbar-background-color: #E5E4E2;
+  --navbar-border-bottom: #E5E4E2;
+  --icon-hover-color: black;
+  --input-background-color: #F5F5F5; /* Dark background for input fields */
+  --input-border-color: #BEBFC5;     /* Light grey border for input fields */
+  --placeholder-color: #BEBFC5;
+  --btn-text-color: #000000;     /* Dark text */
+  --btn-border-color: #2A3439;   /* Light grey border */
+  --btn-background-color: transparent;
+}
+
+/* Dark Mode */
+:root.dark-mode {
+  --background-color: #121212;  /* Dark background */
+  --text-color: #e0e0e0;        /* Light text */
+  --icon-color: #DBD7D2;        /* Light icons */
+  --navbar-background-color: #414A4C;
+  --navbar-border-bottom: #414A4C;
+  --icon-hover-color: #FFFFFF;
+  --input-background-color: #1A1A1A; /* Dark background for input fields */
+  --input-border-color: #666666;     /* Light grey border for input fields */
+  --placeholder-color: #CCCCCC;
+  --btn-text-color: #FFFFFF;     /* White text */
+  --btn-border-color: #666666;   /* Light grey border */
+  --btn-background-color: transparent;
+}
+
+.navbar-lewagon {
+  background-color: var(--navbar-background-color); /* Use CSS var for easier theming */
+  border-bottom: var(--navbar-border-bottom);
+}
+
+/* Apply background color to body, for example */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.form-main-styles-container h4,
+.form-main-styles-container label {
+  color: var(--label-color);
+}
+
+.navbar-icons .btn {
+  color: var(--icon-color);
+}
+
+.navbar-icons .btn:hover {
+  color: var(--icon-hover-color);
+}
+
+.navbar-brand-name {
+  color: #0000FF;
+}
+
+.fa-infinity {
+  color: #DAA520;
+}
+/* Dark mode icons */
+.icon {
+  color: var(--icon-hover-color);
+}
+
+.custom-vote-button {
+  font-weight: bold;
+  padding: 4px 4px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.custom-vote-button.upvote {
+  background-color: hsl(120, 1%, 30%);
+  color: white;
+}
+
+.custom-vote-button.downvote {
+  background-color: hsl(120, 1%, 30%);
+  color: white;
+}
+
+.custom-vote-button:hover {
+  background-color: darken(hsl(120, 1%, 30%), 10%);
 }

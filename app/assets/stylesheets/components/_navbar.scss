@@ -1,12 +1,140 @@
+/* Navbar layout */
+.container-fluid {
+  padding: 0;
+  margin: 0;
+}
+
 .navbar-lewagon {
-  justify-content: space-between;
-  background: white;
+  background-color: var(--navbar-background-color, #BEBFC5); /* Use CSS var for easier theming */
+  width: 100%;
+  position: fixed;
+  z-index: 1000;
+  max-width: 1200px;
+  border-bottom: 0.5px solid #E5E4E2;
+  margin: 0 auto; /* Centers the navbar horizontally */
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
+/* Flexbox container for navbar items */
+.navbar-inner {
+  padding: 0px;   /* Adds side padding for content alignment */
+  display: flex;
+  justify-content: space-between; /* Space out the logo, search bar, and icons */
+  align-items: center;
+  width: 100%;
 }
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+
+.navbar-brand-name {
+  font-size: 1.8rem;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+  color: black;
+  padding-left: 5px;
+  margin-right: 5px;
+}
+
+/* Search bar styles */
+
+.search-form-control {
+  position: relative;
+  width: 200px;
+  padding-left: 15px;
+}
+
+.search-form-control .btn {
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  right: 8px;
+  background-color: #f8f9fa;
+  border: none;
+}
+
+.search-form-control .form-control {
+  width: 100%;
+  height: 3.3rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  border: 1px solid #414A4C;
+  border-radius: 1.5rem;
+  background-color: #f8f9fa;
+}
+
+.search-form-control .form-control:focus {
+  border: 1px solid #FE0000;
+  outline: none !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* Navbar icons container */
+
+.navbar-icons .icon-item {
+  margin: 0; /* Remove any default margins on individual icons */
+}
+
+/* Icon button styling */
+.navbar-icons .btn {
+  background: transparent;
+  border: none;
+  color: #0000FF;
+  cursor: pointer;
+  transition: color 0.3s;
+  padding-right: 5px;
+}
+
+
+.navbar-icons .btn:hover {
+  color: #FE0000; /* Hover color for icons */
+}
+
+
+
+/* Ensuring the bottom border is visible */
+
+
+.dropdown .btn i {
+  padding-left: 10px;
+  margin-left: -7px;
+}
+
+.dropdown .dropdown-menu {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.custom-dropdown {
+  margin-left: -50px;
+  max-width: 100vw;
+  overflow-x: auto;
+}
+
+
+/* For smaller screens (mobile responsiveness) */
+@media (max-width: 768px) {
+  .navbar-inner {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping */
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .custom-dropdown {
+    margin-left: 0; /* For mobile, remove the left margin */
+  }
+
+  .search-container {
+    flex-grow: 1; /* Take up remaining space */
+    max-width: 200px; /* Allow some flexibility for smaller screens */
+    margin-bottom: 10px;
+    margin: 0 10px;
+  }
+
+  .navbar-icons {
+    display: flex;
+    justify-content: flex-end;/* Keep icons aligned to the far right */
+  }
+
+  .navbar-logo {
+    width: 40px;
+  }
 }

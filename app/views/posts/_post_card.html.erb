@@ -1,0 +1,29 @@
+<div class="post-card">
+  <hr class="post-divider"> <!-- Demarcation above -->
+
+  <div class="post-content">
+    <p><strong>Category:</strong> <%= post.category.name %></p>
+    <p><%= display_user_with_photo(post.user) %></p>
+    <h2><%= link_to post.title, post_path(post) %></h2>
+    <p><%= post.created_at.strftime("%B %d, %Y") %></p>
+    <p><%= truncate(post.content, length: 250, separator: ' ') %></p>
+
+    <% if post.photos.attached? %>
+      <div class="post-media">
+        <% post.photos.each do |photo| %>
+          <% if photo.content_type.start_with?('image') %>
+            <%= cl_image_tag photo.key, height: 200, width: 300, crop: :fill, class: 'post-image' %>
+          <% elsif photo.content_type.start_with?('video') && photo.url.present? %>
+            <video controls height="200" width="300" class="post-video">
+              <source src="<%= photo.url %>" type="<%= photo.content_type %>">
+            </video>
+          <% else %>
+            <p>Unsupported media type</p>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <hr class="post-divider"> <!-- Demarcation below -->
+</div>

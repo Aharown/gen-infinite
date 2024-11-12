@@ -1,25 +1,6 @@
-<h1>Posts</h1>
-
-<% @posts.each do |post| %>
-  <div class="post">
-    <p><strong>Category:</strong> <%= post.category.name %></p>
-    <p><strong>Posted by:</strong> <%= post.user.username %></p>
-    <h2><%= link_to post.title, post_path(post) %></h2> | <%= post.created_at.strftime("%B %d, %Y") %></p>
-    <p><%= post.content %></p>
-
-    <% if post.photos.attached? %> <!-- Check if the post has photos attached -->
-      <div class="post-media">
-        <% post.photos.each do |media| %>
-          <% if media.content_type.start_with?('image') %>
-            <%= cl_image_tag media.key, height: 200, width: 300, crop: :fill, class: 'post-image' %>
-          <% elsif media.content_type.start_with?('video') %>
-            <video controls height="200" width="300" class="post-video">
-              <source src="<%= media.url %>" type="<%= media.content_type %>">
-              Your browser does not support the video tag.
-            </video>
-          <% end %>
-        <% end %>
-      </div>
+<div id="feed">
+    <% @posts.each do |post| %>
+      <%= render partial: 'posts/post_card', locals: { post: post } %>
     <% end %>
-  </div>
-<% end %>
+
+</div>

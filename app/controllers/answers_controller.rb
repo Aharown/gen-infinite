@@ -21,12 +21,15 @@ class AnswersController < ApplicationController
     end
   end
 
-
   def edit
   end
 
   def update
-    @answer = Answer.find(params[:id])
+    if @answer.update(answer_params)
+      redirect_to post_path(@answer.post), notice: "Comment has been updated ✅."
+    else
+      redirect_to post_path(@answer.post), alert: 'Failed to update comment.'
+    end
   end
 
   def destroy
@@ -36,6 +39,16 @@ class AnswersController < ApplicationController
     else
       redirect_to post_path, alert: "Failed to delete the comment 🛑."
     end
+  end
+
+  def upvote
+    @answer.liked_by(current_user)
+    redirect_to @answer.post
+  end
+
+  def downvote
+    @post.unliked_by(current_user)
+    redirect_to @answer.post
   end
 
   private
@@ -48,4 +61,7 @@ class AnswersController < ApplicationController
     @answer = Answer.find(params[:id])
   end
 
+  def find_answer
+    @answer = Answer.find(params[:id])
+  end
 end
