@@ -1,0 +1,11 @@
+<% if tags.any? %>
+  <h4>Select Tags:</h4>
+  <% tags.each do |tag| %>
+    <div>
+      <%= check_box_tag 'post[tag_ids][]', tag.id, @post.tags.include?(tag) %>
+      <%= label_tag "post_tag_ids_#{tag.id}", tag.name %>
+    </div>
+  <% end %>
+<% else %>
+  <p>No tags available for this category.</p>
+<% end %>
