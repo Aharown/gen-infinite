@@ -24,7 +24,11 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show]
   resources :tags, except: [:edit, :update]
-  resources :categories
+  resources :categories, only: [:show] do
+    member do
+      get :tags
+    end
+  end
 
   # Defines the root path route ("/")
   # root "posts#index"
