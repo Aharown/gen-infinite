@@ -1,29 +1,81 @@
 <div class="post-card">
-  <hr class="post-divider"> <!-- Demarcation above -->
+  <% unless local_assigns[:no_post_header] %>
+    <div class="post-header">
+      <div class="user-profile-photo">
+        <%= image_tag(post.user.profile_photo, alt: "#{post.user.username}'s profile photo") if post.user.profile_photo.attached? %>
+      </div>
+      <p class="username"><strong><%= link_to_user(post.user) %></strong></p>
+    </div>
+  <% end %>
 
   <div class="post-content">
-    <p><strong>Category:</strong> <%= post.category.name %></p>
-    <p><%= display_user_with_photo(post.user) %></p>
+    <p><strong>Category:</strong> <span><%= link_to post.category.name, category_path(post.category) %></span></p>
+    <hr class="post-divider">
     <h2><%= link_to post.title, post_path(post) %></h2>
     <p><%= post.created_at.strftime("%B %d, %Y") %></p>
     <p><%= truncate(post.content, length: 250, separator: ' ') %></p>
 
-    <% if post.photos.attached? %>
-      <div class="post-media">
-        <% post.photos.each do |photo| %>
-          <% if photo.content_type.start_with?('image') %>
-            <%= cl_image_tag photo.key, height: 200, width: 300, crop: :fill, class: 'post-image' %>
-          <% elsif photo.content_type.start_with?('video') && photo.url.present? %>
-            <video controls height="200" width="300" class="post-video">
-              <source src="<%= photo.url %>" type="<%= photo.content_type %>">
-            </video>
-          <% else %>
-            <p>Unsupported media type</p>
+    <% if post.photos.attached? && post.photos.count > 1 %>
+      <div id="carousel-<%= post.id %>" class="carousel slide post-carousel">
+        <div class="carousel-inner">
+          <% post.photos.each_with_index do |media, index| %>
+            <div class="carousel-item <%= 'active' if index.zero? %>">
+              <% if media.content_type.start_with?('image') %>
+                <%= cl_image_tag media.key, crop: :fill, class: 'd-block w-100 post-image' %>
+              <% elsif media.content_type.start_with?('video') && media.url.present? %>
+                <video controls class="d-block w-100 post-video">
+                  <source src="<%= media.url %>" type="<%= media.content_type %>">
+                  Your browser does not support the video tag.
+                </video>
+              <% else %>
+                <p>Unsupported media type</p>
+              <% end %>
+            </div>
           <% end %>
-        <% end %>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-<%= post.id %>" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carousel-<%= post.id %>" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
+    <% elsif post.photos.attached? %>
+      <% if post.photos.first.content_type.start_with?('image') %>
+        <%= cl_image_tag post.photos.first.key, crop: :fill, class: 'post-image' %>
+      <% elsif post.photos.first.content_type.start_with?('video') && post.photos.first.url.present? %>
+        <video controls class="post-video">
+          <source src="<%= post.photos.first.url %>" type="<%= post.photos.first.content_type %>">
+          Your browser does not support the video tag.
+        </video>
+      <% else %>
+        <p>Unsupported media type</p>
+      <% end %>
     <% end %>
   </div>
 
-  <hr class="post-divider"> <!-- Demarcation below -->
+  <hr class="post-divider">
+  <div class="post-icons">
+    <span class="post-icon">
+      <%= link_to "#{post_path(post)}#answers" do %>
+        <i class="fa fa-comment"></i> <!-- Comment icon -->
+        <span><%= post.answers.count %></span>
+      <% end %>
+    </span>
+    <span class="post-icon" data-controller="vote">
+      <%= link_to upvote_post_path(post),
+        method: :post,
+        remote: true,
+        data: { action: "vote#upvote" } do %>
+        <i class="fa fa-thumbs-up"></i>
+      <% end %>
+      <span><%= post.get_upvotes.size %></span>
+    </span>
+    <span class="post-icon">
+      <i class="fa fa-thumbs-down"></i>
+      <span><%= post.get_downvotes.size %></span> <!-- Downvote count -->
+    </span>
+  </div>
 </div>

@@ -2,6 +2,7 @@ import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
   static targets = ["tagsContainer", "categorySelect"];
+  
   static values = {vlad: String}
   connect() {
     // Check if the tagsContainer and categorySelect are available
