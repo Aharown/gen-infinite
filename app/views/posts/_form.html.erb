@@ -1,5 +1,5 @@
 <div class="form-main-styles-container">
-  <div class="form-container-grid">
+  <div class="form-container-grid" data-controller="tags">
     <div class="header">
       <h2><%= mode %></h2>
     </div>
@@ -19,13 +19,12 @@
         <h4><%= form.label :category_id, "Category" %></h4>
         <%= form.collection_select :category_id, Category.all, :id, :name, { prompt: "Select a Category" },
           class: "form-control",
-          data: { controller: "tags", action: "tags#categoryChanged", tags_target: "categorySelect" } %>
+          data: { action: "tags#categoryChanged", tags_target: "categorySelect" } %>
       </div>
 
-
-      <div class="form-group" data-tags-target="tagsContainer">
-        <h4>Tags</h4>
-        <%= render "tags/form", tags: @tags, post: @post %>
+      <%  tags = @post.tags.to_json(only: [:id, :name])%>
+      <div class="form-group" id="tag-values" data-tags-target="tagsContainer" data-checks="<%= tags %>">
+        <%= render "tags/form", tags: @tags, post: @post, form: form %>
       </div>
 
       <% if @post.photos.attached? %>
