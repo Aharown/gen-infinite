@@ -1,9 +1,15 @@
 /* Form controls */
 .form-control {
   background-color: var(--input-background-color);  /* Background color */
-  color: var(--text-color);                    /* Text color */
+  color: var(--text-color) !important;                    /* Text color */
   border: 1px solid var(--input-border-color);       /* Border color */
   border-radius: 17px;
+}
+
+/* Prevent the background from changing on focus */
+.form-control:focus {
+  background-color: var(--input-background-color) !important; /* Or use the color you prefer */
+  border: 1px solid var(--input-border-color);
 }
 
 .form-control::placeholder {
@@ -71,4 +77,8 @@
 .edit-answer-button, .delete-answer-button {
   display: inline-block;
   margin: 0; /* Remove default margins if necessary */
+}
+
+.vote-buttons {
+  margin-bottom: 13px; /* Adjust as needed */
 }

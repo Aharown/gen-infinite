@@ -1,10 +1,12 @@
 <div class="post-card">
-  <div class="post-header">
-    <div class="user-profile-photo">
-      <%= image_tag(post.user.profile_photo, alt: "#{post.user.username}'s profile photo") if post.user.profile_photo.attached? %>
+  <% unless local_assigns[:no_post_header] %>
+    <div class="post-header">
+      <div class="user-profile-photo">
+        <%= image_tag(post.user.profile_photo, alt: "#{post.user.username}'s profile photo") if post.user.profile_photo.attached? %>
+      </div>
+      <p class="username"><strong><%= link_to_user(post.user) %></strong></p>
     </div>
-    <p class="username"><strong><%= link_to_user(post.user) %></strong></p>
-  </div>
+  <% end %>
 
   <div class="post-content">
     <p><strong>Category:</strong> <span><%= link_to post.category.name, category_path(post.category) %></span></p>
