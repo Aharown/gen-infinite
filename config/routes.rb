@@ -10,20 +10,22 @@ Rails.application.routes.draw do
   resources :posts do
     get 'category/:category_id', to: 'posts#index', as: :category_posts, on: :collection
       member do
-        post 'upvote', action: 'upvote'
-        post 'downvote', action: 'downvote'
+        post :upvote
+        post :downvote
+        delete :unvote
       end
 
     resources :answers do
       member do
-        post 'upvote', action: 'upvote'
-        post 'downvote', action: 'downvote'
+        post :upvote
+        post :downvote
+        delete :unvote
       end
     end
   end
 
   resources :users, only: [:show]
-  resources :tags, except: [:edit, :update]
+  resources :tags, except: %i[edit update]
   resources :categories
 
   # Defines the root path route ("/")

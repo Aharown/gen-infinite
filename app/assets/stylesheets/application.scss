@@ -241,3 +241,15 @@ body {
 .custom-vote-button:hover {
   background-color: darken(hsl(120, 1%, 30%), 10%);
 }
+
+/* Active state for upvote button */
+div.vote-buttons .custom-vote-button.upvote.active {
+  background-color: hsl(120, 1%, 30%); /* Brighter green for active upvote */
+  color: #0f5c08;
+}
+
+/* Active state for downvote button */
+div.vote-buttons .custom-vote-button.downvote.active {
+  background-color: hsl(120, 1%, 30%); /* Brighter red for active downvote */
+  color: #850e0e;
+}

@@ -2,23 +2,30 @@ class VotesController < ApplicationController
   before_action :authenticate_user!
   before_action :find_votable
 
-  def upvote
-    @post = Post.find(params[:id])
-    @post.upvote_by current_user
-    redirect_to @post
+  def create
+    if current_user.voted_up_on?(@votable)
+      @votable.unliked_by(current_user)
+    else
+      @votable.liked_by(current_user)
+    end
+    render json: vote_counts
   end
 
-  def downvote
-    @post = Post.find(params[:id])
-    @post.downvote_from current_user
-    redirect_to @post
+  def destroy
+    @votable.unliked_by(current_user)
+    render json: vote_counts
   end
 
   private
 
   def find_votable
-    votable_type = params[:votable_type].capitalize
-    votable_id = params[:votable_id]
-    @votable = votable_type.constantize.find(votable_id)
+    @votable = YourModel.find(params[:id]) # Replace with actual votable lookup logic
+  end
+
+  def vote_counts
+    {
+      upvotes: @votable.get_upvotes.size,
+      downvotes: @votable.get_downvotes.size
+    }
   end
 end
