@@ -23,11 +23,11 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:show]
-  # resources :tags, except: [:edit, :update]
+  resources :tags, except: [:edit, :update]
   resources :categories, only: [:show] do
     member do
       get :tags
     end
   end
-  
+
 end
