@@ -15,20 +15,44 @@
     <p><%= post.created_at.strftime("%B %d, %Y") %></p>
     <p><%= truncate(post.content, length: 250, separator: ' ') %></p>
 
-    <% if post.photos.attached? %>
-      <div class="post-media">
-        <% post.photos.each do |photo| %>
-          <% if photo.content_type.start_with?('image') %>
-            <%= cl_image_tag photo.key, crop: :fill, class: 'post-image' %>
-          <% elsif photo.content_type.start_with?('video') && photo.url.present? %>
-            <video controls height="200" width="300" class="post-video">
-              <source src="<%= photo.url %>" type="<%= photo.content_type %>">
-            </video>
-          <% else %>
-            <p>Unsupported media type</p>
+    <% if post.photos.attached? && post.photos.count > 1 %>
+      <div id="carousel-<%= post.id %>" class="carousel slide post-carousel">
+        <div class="carousel-inner">
+          <% post.photos.each_with_index do |media, index| %>
+            <div class="carousel-item <%= 'active' if index.zero? %>">
+              <% if media.content_type.start_with?('image') %>
+                <%= cl_image_tag media.key, crop: :fill, class: 'd-block w-100 post-image' %>
+              <% elsif media.content_type.start_with?('video') && media.url.present? %>
+                <video controls class="d-block w-100 post-video">
+                  <source src="<%= media.url %>" type="<%= media.content_type %>">
+                  Your browser does not support the video tag.
+                </video>
+              <% else %>
+                <p>Unsupported media type</p>
+              <% end %>
+            </div>
           <% end %>
-        <% end %>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-<%= post.id %>" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carousel-<%= post.id %>" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
+    <% elsif post.photos.attached? %>
+      <% if post.photos.first.content_type.start_with?('image') %>
+        <%= cl_image_tag post.photos.first.key, crop: :fill, class: 'post-image' %>
+      <% elsif post.photos.first.content_type.start_with?('video') && post.photos.first.url.present? %>
+        <video controls class="post-video">
+          <source src="<%= post.photos.first.url %>" type="<%= post.photos.first.content_type %>">
+          Your browser does not support the video tag.
+        </video>
+      <% else %>
+        <p>Unsupported media type</p>
+      <% end %>
     <% end %>
   </div>
 
