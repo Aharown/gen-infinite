@@ -26,6 +26,10 @@ body {
   }
 }
 
+.post-content p span {
+  margin-left: 2px; /* Space between 'Category:' and category */
+}
+
 .post-image,
 .post-video {
   width: 100%;   /* Makes media take the full width of the post-card */
