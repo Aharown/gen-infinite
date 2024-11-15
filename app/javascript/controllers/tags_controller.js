@@ -3,16 +3,16 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static targets = ["tagsContainer", "categorySelect"];
 
-  connect() {
-    // Check if the tagsContainer and categorySelect are available
-    if (this.hasCategorySelectTarget) {
-      this.loadTags();
-    }
-  }
+  // connect() {
+  //   // Check if the tagsContainer and categorySelect are available
+  //   if (this.hasCategorySelectTarget) {
+  //     this.loadTags();
+  //   }
+  // }
 
-  categoryChanged() {
-    this.loadTags() // call loadTags when the category changes
-  }
+  // categoryChanged() {
+  //   this.loadTags() // call loadTags when the category changes
+  // }
 
   loadTags() {
     const categoryId = this.categorySelectTarget.value;
