@@ -12,4 +12,85 @@ body {
   color: var(--icon-color);
 }
 
+.post-card {
+  border: transparent; // Border color, adjust for dark/light mode as needed
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 7px;
+  margin-bottom: 8px;
+  background-color: var(--postcard-background-color);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // Optional shadow for effect
 
+  .post-content {
+    margin-top: 8px;
+  }
+}
+
+.post-image,
+.post-video {
+  width: 100%;   /* Makes media take the full width of the post-card */
+  height: 400px;  /* Adjusts the height automatically to keep the aspect ratio */
+  margin: 0 auto;   /* Centers the media horizontally if it's smaller than full width */
+  border-radius: 8px; /* Optional: Adds rounded corners */
+}
+
+
+.user-profile-photo {
+  width: 40px; /* Size of profile photo */
+  height: 40px;
+  border-radius: 50%; /* Make the image circular */
+  overflow: hidden;
+  img {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+  }
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Adjust spacing between photo and username */
+  margin-bottom: 20px; /* Spacing between header and content */
+}
+
+.username {
+  font-weight: bold;
+  color: var(--text-color);
+  position: relative;
+  top: 9px; /* Adjust this value to control the downward movement */
+}
+
+.post-icons {
+  display: flex;
+  justify-content: flex-start;
+  padding: 3px 0;
+  font-size: 1.1em;
+  color: var(--icon-color);
+
+  .post-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+
+    i {
+      font-size: 1.2em;
+    }
+
+    span {
+      font-weight: bold;
+      margin-left: 4px;
+    }
+
+    .fa-thumbs-up {
+      margin-bottom: 2px;
+    }
+
+    .fa-thumbs-down {
+      margin-top: 1px;
+    }
+
+    .fa-comment {
+      margin-top: 4px;
+    }
+  }
+}

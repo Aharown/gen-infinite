@@ -1,9 +1,14 @@
 <div class="post-card">
-  <hr class="post-divider"> <!-- Demarcation above -->
+  <div class="post-header">
+    <div class="user-profile-photo">
+      <%= image_tag(post.user.profile_photo, alt: "#{post.user.username}'s profile photo") if post.user.profile_photo.attached? %>
+    </div>
+    <p class="username"><strong><%= post.user.username %></strong></p>
+  </div>
 
   <div class="post-content">
     <p><strong>Category:</strong> <%= post.category.name %></p>
-    <p><%= display_user_with_photo(post.user) %></p>
+    <hr class="post-divider">
     <h2><%= link_to post.title, post_path(post) %></h2>
     <p><%= post.created_at.strftime("%B %d, %Y") %></p>
     <p><%= truncate(post.content, length: 250, separator: ' ') %></p>
@@ -12,7 +17,7 @@
       <div class="post-media">
         <% post.photos.each do |photo| %>
           <% if photo.content_type.start_with?('image') %>
-            <%= cl_image_tag photo.key, height: 200, width: 300, crop: :fill, class: 'post-image' %>
+            <%= cl_image_tag photo.key, crop: :fill, class: 'post-image' %>
           <% elsif photo.content_type.start_with?('video') && photo.url.present? %>
             <video controls height="200" width="300" class="post-video">
               <source src="<%= photo.url %>" type="<%= photo.content_type %>">
@@ -25,5 +30,26 @@
     <% end %>
   </div>
 
-  <hr class="post-divider"> <!-- Demarcation below -->
+  <hr class="post-divider">
+  <div class="post-icons">
+    <span class="post-icon">
+      <%= link_to "#{post_path(post)}#answers" do %>
+        <i class="fa fa-comment"></i> <!-- Comment icon -->
+        <span><%= post.answers.count %></span>
+      <% end %>
+    </span>
+    <span class="post-icon" data-controller="vote">
+      <%= link_to upvote_post_path(post),
+        method: :post,
+        remote: true,
+        data: { action: "vote#upvote" } do %>
+        <i class="fa fa-thumbs-up"></i>
+      <% end %>
+      <span><%= post.get_upvotes.size %></span>
+    </span>
+    <span class="post-icon">
+      <i class="fa fa-thumbs-down"></i>
+      <span><%= post.get_downvotes.size %></span> <!-- Downvote count -->
+    </span>
+  </div>
 </div>

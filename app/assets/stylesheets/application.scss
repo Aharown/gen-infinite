@@ -21,7 +21,7 @@
   padding-top: 85px;
   min-height: calc(100vh - 80px);
   padding-bottom: 40px;
-  padding-left: 15px;
+  padding-left: 12px;
   padding-right: 10px;
 }
 
@@ -155,11 +155,11 @@ a {
 
 /* Light Mode (default) */
 :root {
-  --background-color: #F7F7F7;  /* Light background */
+  --background-color: #E5E4E2;  /* Light background */
   --text-color: #414A4C;        /* Dark text */
   --icon-color: #808080;        /* Dark icons */
-  --navbar-background-color: #E5E4E2;
-  --navbar-border-bottom: #E5E4E2;
+  --navbar-background-color: #F7F7F7;
+  --navbar-border-bottom: 1px solid #C0C0C0;
   --icon-hover-color: black;
   --input-background-color: #F5F5F5; /* Dark background for input fields */
   --input-border-color: #BEBFC5;     /* Light grey border for input fields */
@@ -167,13 +167,16 @@ a {
   --btn-text-color: #000000;     /* Dark text */
   --btn-border-color: #2A3439;   /* Light grey border */
   --btn-background-color: transparent;
+  --postcard-background-color: #F7F7F7;
 }
 
 /* Dark Mode */
 :root.dark-mode {
   --background-color: #121212;  /* Dark background */
-  --text-color: #e0e0e0;        /* Light text */
-  --icon-color: #DBD7D2;        /* Light icons */
+  --text-color: #B2FFFF;        /* Light text */
+  --icon-color: #DBD7D2;
+  --h2-text-color: #B2FFFF;
+  --username-text-color: #B9D9EB;
   --navbar-background-color: #414A4C;
   --navbar-border-bottom: #414A4C;
   --icon-hover-color: #FFFFFF;
@@ -183,6 +186,7 @@ a {
   --btn-text-color: #FFFFFF;     /* White text */
   --btn-border-color: #666666;   /* Light grey border */
   --btn-background-color: transparent;
+  --postcard-background-color: #1B1B1B;
 }
 
 .navbar-lewagon {
@@ -194,6 +198,14 @@ a {
 body {
   background-color: var(--background-color);
   color: var(--text-color);
+}
+
+.username {
+  color: var(--username-text-color);
+}
+
+h2 {
+  color: var(--h2-text-color)
 }
 
 .form-main-styles-container h4,

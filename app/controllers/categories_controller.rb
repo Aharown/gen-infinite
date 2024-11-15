@@ -1,15 +1,17 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show]
   before_action :set_categories, only: [:index, :show]
-  
-  def tags
-  @category = Category.find(params[:id])
-  @tags = @category.tags
 
-  respond_to do |format|
-    format.json { render json: { tags_html: render_to_string(partial: "tags/form", locals: { tags: @tags }) } }
+  def tags
+    @category = Category.find(params[:id])
+    @tags = @category.tags
+
+    respond_to do |format|
+      format.json { render json: { tags_html: render_to_string(partial: "tags/form", locals: { tags: @tags }) } }
+    end
   end
-  
+
+
   def index
     @categories
   end

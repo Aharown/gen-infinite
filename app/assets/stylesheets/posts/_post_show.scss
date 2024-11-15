@@ -26,6 +26,28 @@
   margin-bottom: 5px; /* This adds space below the comment text area */
 }
 
+.user-profile-photo-show {
+  width: 30px; /* Size of profile photo */
+  height: 30px;
+  border-radius: 50%; /* Make the image circular */
+  overflow: hidden;
+  img {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+  }
+}
+
+.post-header-show {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Adjust spacing between photo and username */
+  margin-bottom: 10px; /* Spacing between header and content */
+}
+
+.post-category h2 {
+  font-size: large;
+}
+
 /* Ensure the buttons are displayed horizontally */
 .answer-actions {
   display: flex; /* Use flexbox to align the buttons horizontally */
@@ -33,6 +55,18 @@
   padding-bottom: 5px;
 }
 
+.answer-ed-actions {
+  display: flex; /* Use flexbox to align the buttons horizontally */
+  gap: 10px; /* Adds space between the buttons */
+  padding-bottom: 5px;
+  margin-top: 20px;
+}
+
+.post-divider {
+  margin-top: 7px; /* Decrease to bring it closer to the buttons */
+}
+
+.p
 /* Optional: If you need to style the buttons to look aligned or consistent */
 .edit-answer-button, .delete-answer-button {
   display: inline-block;
