@@ -164,7 +164,7 @@ a {
   --icon-hover-color: black;
   --input-background-color: #F5F5F5; /* Dark background for input fields */
   --input-border-color: #BEBFC5;     /* Light grey border for input fields */
-  --placeholder-color: #FFFFFF;
+  --placeholder-color: #BEBFC5;
   --btn-text-color: #000000;     /* Dark text */
   --btn-border-color: #BEBFC5;   /* Light grey border */
   --btn-background-color: #BEBFC5;
@@ -246,4 +246,12 @@ h2 {
 /* Dark mode icons */
 .icon {
   color: var(--icon-hover-color);
+}
+
+.category-title {
+  margin-top: 10px; /* Adds spacing above the title */
+}
+
+.mode-header {
+  margin-top: 10px; /* Adds spacing above the title */
 }
