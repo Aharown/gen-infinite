@@ -3,11 +3,11 @@
     <div class="user-profile-photo">
       <%= image_tag(post.user.profile_photo, alt: "#{post.user.username}'s profile photo") if post.user.profile_photo.attached? %>
     </div>
-    <p class="username"><strong><%= post.user.username %></strong></p>
+    <p class="username"><strong><%= link_to_user(post.user) %></strong></p>
   </div>
 
   <div class="post-content">
-    <p><strong>Category:</strong> <%= post.category.name %></p>
+    <p><strong>Category:</strong> <span><%= link_to post.category.name, category_path(post.category) %></span></p>
     <hr class="post-divider">
     <h2><%= link_to post.title, post_path(post) %></h2>
     <p><%= post.created_at.strftime("%B %d, %Y") %></p>

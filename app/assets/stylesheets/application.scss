@@ -176,7 +176,7 @@ a {
   --text-color: #B2FFFF;        /* Light text */
   --icon-color: #DBD7D2;
   --h2-text-color: #B2FFFF;
-  --username-text-color: #B9D9EB;
+  --username-text-color: #DBD7D2;
   --navbar-background-color: #414A4C;
   --navbar-border-bottom: #414A4C;
   --icon-hover-color: #FFFFFF;
@@ -233,23 +233,23 @@ h2 {
   color: var(--icon-hover-color);
 }
 
-.custom-vote-button {
-  font-weight: bold;
-  padding: 4px 4px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
+// .custom-vote-button {
+//   font-weight: bold;
+//   padding: 4px 4px;
+//   border-radius: 5px;
+//   transition: background-color 0.3s ease;
+// }
 
-.custom-vote-button.upvote {
-  background-color: hsl(120, 1%, 30%);
-  color: white;
-}
+// .custom-vote-button.upvote {
+//   background-color: hsl(120, 1%, 30%);
+//   color: white;
+// }
 
-.custom-vote-button.downvote {
-  background-color: hsl(120, 1%, 30%);
-  color: white;
-}
+// .custom-vote-button.downvote {
+//   background-color: hsl(120, 1%, 30%);
+//   color: white;
+// }
 
-.custom-vote-button:hover {
-  background-color: darken(hsl(120, 1%, 30%), 10%);
-}
+// .custom-vote-button:hover {
+//   background-color: darken(hsl(120, 1%, 30%), 10%);
+// }

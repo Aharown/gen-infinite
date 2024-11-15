@@ -14,7 +14,7 @@
 </div>
 
 <div class="post-category">
-  <h2><%= @post.category.name %></h2>
+  <h2><%= link_to @post.category.name, category_path(@post.category) %></h2>
 </div>
 
 <div class="post-header-show">
@@ -66,6 +66,7 @@
     <span id="downvote-count-<%= @post.id %>" class="ms-2" data-vote-target="downvoteCount"><%= @post.get_downvotes.size %></span>
   </div>
 </div>
+
 
 <div class="answers-section" id="answers">
   <%= form_with(model: [@post, @new_answer], local: true) do |form| %>
