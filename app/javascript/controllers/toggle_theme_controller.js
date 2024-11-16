@@ -7,8 +7,8 @@ export default class extends Controller {
     const theme = localStorage.getItem("theme");
     if (theme === "dark") {
       document.documentElement.classList.add("dark-mode");
-      this.iconTarget.classList.remove("fa-moon");
-      this.iconTarget.classList.add("fa-sun");
+      this.iconTarget.classList.add("fa-moon");
+      this.iconTarget.classList.remove("fa-sun");
       this.modeTextTarget.textContent = "Dark";  // Set text to 'Dark'
     } else {
       this.modeTextTarget.textContent = "Light";  // Set text to 'Light'
@@ -23,7 +23,7 @@ export default class extends Controller {
     this.iconTarget.classList.toggle("fa-sun");
 
     // Toggle the text between 'Light' and 'Dark'
-    this.modeTextTarget.textContent = document.documentElement.classList.contains("dark-mode") ? "Dark" : "Light";
+    this.modeTextTarget.textContent = document.documentElement.classList.contains("dark-mode") ? "Light" : "Dark";
 
     // Save the user's theme preference in localStorage
     localStorage.setItem("theme", document.documentElement.classList.contains("dark-mode") ? "dark" : "light");

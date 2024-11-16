@@ -13,6 +13,7 @@ class AnswersController < ApplicationController
     @post = Post.find(params[:post_id])
     @answer = @post.answers.build(answer_params)
     @answer.user = current_user
+    @answer.parent_id = params[:answer][:parent_id] 
 
     if @answer.save
       redirect_to post_path(@post)
@@ -54,7 +55,7 @@ class AnswersController < ApplicationController
   private
 
   def answer_params
-    params.require(:answer).permit(:content)
+    params.require(:answer).permit(:content, :parent_id)
   end
 
   def set_answer

@@ -94,16 +94,17 @@
 
 
   <div class="answers-section" id="answers">
-    <%= form_with(model: [@post, @new_answer], local: true) do |form| %>
+    <%= form_with(model: [@post, @new_answer], local: true, html: { data: { controller: "comment-form" } }) do |form| %>
       <div class="form-group">
         <%= form.label :content, "Add a comment" %>
-        <%= form.text_area :content, rows: 2, class: "form-control" %>
+        <%= form.text_area :content, rows: 1, class: "form-control",
+            data: { action: "focus->comment-form#showButtons", comment_form_target: "textarea" } %>
       </div>
 
-
-      <div class="form-buttons">
+      <div class="form-buttons" data-comment-form-target="buttons" style="display: none;">
         <%= form.submit "Comment", class: "btn-primary" %>
-        <%= button_to "Clear", "#", method: :get, class: "btn-primary", onclick: "event.preventDefault(); document.querySelector('.form-control').value = '';" %>
+        <%= button_to "Clear", "#", method: :get, class: "btn-primary",
+          data: { action: "click->comment-form#clearForm" } %>
       </div>
     <% end %>
 
@@ -137,6 +138,7 @@
       </div>
     <% end %>
 
+
   <script>
   document.addEventListener('DOMContentLoaded', function() {
     // Add event listeners to each edit button (whether link or button)
@@ -154,5 +156,3 @@
     });
   });
   </script>
- </div>
-</div>
