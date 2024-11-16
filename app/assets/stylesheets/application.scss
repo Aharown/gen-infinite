@@ -221,6 +221,7 @@ body {
   color: var(--icon-hover-color);
 }
 
+
 .custom-vote-button {
   font-weight: bold;
   padding: 4px 4px;
@@ -243,13 +244,13 @@ body {
 }
 
 /* Active state for upvote button */
-div.vote-buttons .custom-vote-button.upvote.active {
-  background-color: hsl(120, 1%, 30%); /* Brighter green for active upvote */
-  color: #0f5c08;
+.custom-vote-button.upvote.active {
+  background-color: hwb(120 6% 57%); /* Brighter green for active upvote */
+  color: white;
 }
 
 /* Active state for downvote button */
-div.vote-buttons .custom-vote-button.downvote.active {
-  background-color: hsl(120, 1%, 30%); /* Brighter red for active downvote */
-  color: #850e0e;
+.custom-vote-button.downvote.active {
+  background-color: hwb(0 5% 47%); /* Brighter red for active downvote */
+  color: white;
 }

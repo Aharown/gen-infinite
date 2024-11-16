@@ -43,21 +43,33 @@ export default class extends Controller {
         this.downvoteCountTarget.textContent = data.downvotes;
 
         // Update button states
-        this._updateButtonState(button, type, isActive);
+        this._updateButtonState(button, type, isActive, data);
       });
   }
 
-  _updateButtonState(button, type, isActive) {
+  _updateButtonState(button, type, isActive, data) {
     const isUpvote = type === "upvote";
     const otherButton = isUpvote ? this.downvoteButtonTarget : this.upvoteButtonTarget;
 
-    if (isActive) {
-      // If the current button is active, toggle it off
-      button.classList.remove("active");
+    // Handle the active state based on the current vote status
+    if (isUpvote) {
+      if (isActive) {
+        // If upvote was already active, deactivate it
+        button.classList.remove("active");
+      } else {
+        // Activate upvote and deactivate downvote
+        button.classList.add("active");
+        otherButton.classList.remove("active");
+      }
     } else {
-      // Otherwise, activate the current button and deactivate the opposite button
-      button.classList.add("active");
-      otherButton.classList.remove("active");
+      if (isActive) {
+        // If downvote was already active, deactivate it
+        button.classList.remove("active");
+      } else {
+        // Activate downvote and deactivate upvote
+        button.classList.add("active");
+        otherButton.classList.remove("active");
+      }
     }
   }
 }

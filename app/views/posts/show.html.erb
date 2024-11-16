@@ -42,9 +42,8 @@
     <%= button_to raw('<i class="fa fa-thumbs-up"></i>'),
       upvote_post_path(@post),
       method: :post,
-      remote: true,
       class: 'custom-vote-button upvote',
-      data: { action: "vote#upvote", id: @post.id }
+      data: { action: "vote#upvote", vote_target: "upvoteButton", id: @post.id }
     %>
     <span id="upvote-count-<%= @post.id %>" class="ms-2" data-vote-target="upvoteCount"><%= @post.get_upvotes.size %></span>
   </div>
@@ -54,9 +53,8 @@
     <%= button_to raw('<i class="fa fa-thumbs-down"></i>'),
       downvote_post_path(@post),
       method: :post,
-      remote: true,
       class: 'custom-vote-button downvote',
-      data: { action: "vote#downvote", id: @post.id }
+      data: { action: "vote#downvote", vote_target: "downvoteButton", id: @post.id }
     %>
     <span id="downvote-count-<%= @post.id %>" class="ms-2" data-vote-target="downvoteCount"><%= @post.get_downvotes.size %></span>
   </div>
