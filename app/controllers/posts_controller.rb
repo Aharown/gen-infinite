@@ -23,6 +23,7 @@ class PostsController < ApplicationController
     end
     @answers = @post.answers.order(created_at: :desc)  # Order by newest first
     @new_answer = Answer.new
+    @tags = @post.tags
   end
 
   def new

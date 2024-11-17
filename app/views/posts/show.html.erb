@@ -14,6 +14,17 @@
 <div class="post-header">
   <h1><%= @post.title %></h1>
   <p><%= link_to_user(@post.user) %></p>
+  <h4>Category: </h4><p><%= @post.category.name %></p>
+  <h4>Tags:</h4>
+  <% if @tags.any? %>
+    <ul>
+      <% @tags.each do |tag| %>
+        <li><%= tag.name %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No tags available for this category.</p>
+  <% end %>
 </div>
 
 <div class="post-content">
