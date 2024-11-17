@@ -14,10 +14,27 @@
     <p class="username"><strong><%= link_to_user(@post.user) %></strong></p>
   </div>
 
+  <div class="post-header">
+    <h1><%= @post.title %></h1>
+    <p><%= link_to_user(@post.user) %></p>
+
+
   <div class="post-category">
     <h2><%= link_to @post.category.name, category_path(@post.category) %></h2>
   </div>
 
+  <div class="post-tags">
+    <h4>Tags:</h4>
+    <% if @tags.any? %>
+      <ul>
+        <% @tags.each do |tag| %>
+          <li><%= tag.name %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No tags available for this category.</p>
+    <% end %>
+  </div>
   <div class="post-header-show">
     <h1><%= @post.title %></h1>
   </div>
