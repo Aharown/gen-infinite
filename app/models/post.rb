@@ -6,6 +6,8 @@ class Post < ApplicationRecord
   has_many_attached :photos
   has_many :votes, as: :votable, dependent: :destroy
   has_many :answers, dependent: :destroy
+  has_many :post_tags, dependent: :destroy
+  has_many :tags, through: :post_tags
 end
 
 def upvote

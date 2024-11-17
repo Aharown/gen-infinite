@@ -8,7 +8,6 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-
 require 'faker'
 require 'open-uri'
 
@@ -16,29 +15,35 @@ User.destroy_all
 Post.destroy_all
 Answer.destroy_all
 Category.destroy_all
+PostTag.destroy_all
+Tag.destroy_all
+Category.destroy_all
 
-puts "Seeding categories..."
+puts "Seeding categories and tags..."
 
-categories = [
-  "Technology",
-  "Entertainment",
-  "Lifestyle",
-  "Science",
-  "Education",
-  "Gaming",
-  "Business",
-  "Politics",
-  "Arts",
-  "Sports",
-  "DIY & Crafts",
-  "Parenting"
-]
+categories = {
+  "Technology" => ["AI", "Blockchain", "Cloud Computing", "Cybersecurity", "Programming", "Web Development"],
+  "Entertainment" => ["Sports", "Gaming", "Movies", "Music", "Television"],
+  "Lifestyle" => ["Sports", "Meals"],
+  "Science" => ["Physics", "Biology", "Astronomy", "Chemestry"],
+  "Education" => ["Online Learning", "Classroom Management", "EdTech", "Curriculum Development"],
+  "Business" => ["Job Seeking", "Finance", "Project Management", "Human Ressources", "Marketing", "Economics", "Accounting"],
+  "Politics" => ["Countries", "Sovereignty", "Democracy", "Dictatorship"],
+  "Arts" => ["Painting", "Drawing", "Modern", "Pottery", "Knitting"],
+  "Sports" => ["Football/Soccer", "American Football", "Tennis", "Basketball", "Volleyball", "Handball", "Natation"],
+  "DIY & Crafts" => ["Pottery", "Knitting", "Wood Working"],
+  "Parenting" => ["Baby Care", "Teenagers", "Adulthood", "Children Care", "School"],
+  "Other" => ["Others"]
+}
 
-categories.each do |category_name|
-  Category.create!(name: category_name)
+categories.each do |category_name, tags|
+  category = Category.create!(name: category_name)
+  tags.each do |tag_name|
+    Tag.create!(name: tag_name, category: category)
+  end
 end
 
-puts "Seeded categories"
+puts "Seeded categories and tags"
 
 user_categories = Category.where(name: ["Technology", "Gaming", "Science", "Parenting", "Education", "Lifestyle", "Arts", "Politics", "Business"])
 

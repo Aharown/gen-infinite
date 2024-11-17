@@ -1,0 +1,7 @@
+<% if tags.any? %>
+  <h4>Select Tags:</h4>
+  <%= form.input :tag_ids, collection: [], label: "tags", as: :check_boxes, input_html: { multiple: true, id: "tags-select" } %>
+<% else %>
+  <h4>Tags</h4>
+  <p>No tags available for this category.</p>
+<% end %>

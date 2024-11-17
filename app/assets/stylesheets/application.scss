@@ -21,7 +21,7 @@
   padding-top: 85px;
   min-height: calc(100vh - 80px);
   padding-bottom: 40px;
-  padding-left: 15px;
+  padding-left: 12px;
   padding-right: 10px;
 }
 
@@ -31,12 +31,13 @@
   background-color: var(--btn-background-color); /* Transparent background */
   padding: 8px 24px;
   border-radius: 50px;
-  font-weight: lighter;
+  font-weight: normal;
   opacity: 0.6;
   transition: opacity 0.3s ease, color 0.3s ease, border 0.3s ease;
 
   &:hover {
     opacity: 1; /* Make the button fully visible on hover */
+    border-color: var(--btn-hover-color);
   }
 }
 
@@ -155,25 +156,31 @@ a {
 
 /* Light Mode (default) */
 :root {
-  --background-color: #F7F7F7;  /* Light background */
+  --background-color: #E5E4E2;  /* Light background */
   --text-color: #414A4C;        /* Dark text */
   --icon-color: #808080;        /* Dark icons */
-  --navbar-background-color: #E5E4E2;
-  --navbar-border-bottom: #E5E4E2;
+  --navbar-background-color: #F7F7F7;
+  --navbar-border-bottom: 1px solid #C0C0C0;
   --icon-hover-color: black;
   --input-background-color: #F5F5F5; /* Dark background for input fields */
   --input-border-color: #BEBFC5;     /* Light grey border for input fields */
   --placeholder-color: #BEBFC5;
   --btn-text-color: #000000;     /* Dark text */
-  --btn-border-color: #2A3439;   /* Light grey border */
-  --btn-background-color: transparent;
+  --btn-border-color: #BEBFC5;   /* Light grey border */
+  --btn-background-color: #BEBFC5;
+  --postcard-background-color: #F7F7F7;
+  --show-background-color: #E5E4E2;
+  --post-show-background-color: #F7F7F7;
+  --user-show-background-color: #E5E4E2;
 }
 
 /* Dark Mode */
 :root.dark-mode {
   --background-color: #121212;  /* Dark background */
-  --text-color: #e0e0e0;        /* Light text */
-  --icon-color: #DBD7D2;        /* Light icons */
+  --text-color: #B2FFFF;        /* Light text */
+  --icon-color: #DBD7D2;
+  --h2-text-color: #B2FFFF;
+  --username-text-color: #DBD7D2;
   --navbar-background-color: #414A4C;
   --navbar-border-bottom: #414A4C;
   --icon-hover-color: #FFFFFF;
@@ -181,8 +188,12 @@ a {
   --input-border-color: #666666;     /* Light grey border for input fields */
   --placeholder-color: #CCCCCC;
   --btn-text-color: #FFFFFF;     /* White text */
-  --btn-border-color: #666666;   /* Light grey border */
+  --btn-border-color: #FFFFFF;
+  --btn-hover-color: #15F4EE;
   --btn-background-color: transparent;
+  --postcard-background-color: #1B1B1B;
+  --post-show-background-color: #121212;
+  --user-show-background-color: #121212;
 }
 
 .navbar-lewagon {
@@ -194,6 +205,22 @@ a {
 body {
   background-color: var(--background-color);
   color: var(--text-color);
+}
+
+.post-show {
+  background-color: var(--post-show-background-color);
+}
+
+.user-show {
+  background-color: var(--user-show-background-color);
+}
+
+.username {
+  color: var(--username-text-color);
+}
+
+h2 {
+  color: var(--h2-text-color)
 }
 
 .form-main-styles-container h4,
@@ -221,7 +248,6 @@ body {
   color: var(--icon-hover-color);
 }
 
-
 .custom-vote-button {
   font-weight: bold;
   padding: 4px 4px;
@@ -236,11 +262,15 @@ body {
 
 .custom-vote-button.downvote {
   background-color: hsl(120, 1%, 30%);
-  color: white;
+  color: white
 }
 
-.custom-vote-button:hover {
-  background-color: darken(hsl(120, 1%, 30%), 10%);
+.category-title {
+  margin-top: 10px; /* Adds spacing above the title */
+}
+
+.mode-header {
+  margin-top: 10px; /* Adds spacing above the title */
 }
 
 /* Active state for upvote button */
