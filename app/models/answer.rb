@@ -3,8 +3,6 @@ class Answer < ApplicationRecord
   belongs_to :user
   belongs_to :post
   has_many :votes
-  has_many :replies, class_name: "Answer", foreign_key: "parent_id", dependent: :destroy
-  belongs_to :parent, class_name: "Answer", optional: true
 end
 
 def upvote

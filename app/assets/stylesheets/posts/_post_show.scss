@@ -50,6 +50,13 @@
   margin-bottom: 10px; /* Spacing between header and content */
 }
 
+.post-header-comments {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Adjust spacing between photo and username */
+  margin-bottom: 3px; /* Spacing between header and content */
+}
+
 .post-category h2 {
   font-size: large;
 }
