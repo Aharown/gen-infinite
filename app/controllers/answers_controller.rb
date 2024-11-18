@@ -1,6 +1,7 @@
 class AnswersController < ApplicationController
   before_action :set_answer, only: [:edit, :update, :destroy]
 
+
   def index
     @answer = Answer.all
   end
@@ -13,31 +14,42 @@ class AnswersController < ApplicationController
     @post = Post.find(params[:post_id])
     @answer = @post.answers.build(answer_params)
     @answer.user = current_user
+    p @answer
+    p @answer.user
 
-    if @answer.save
-      redirect_to post_path(@post)
-    else
-      redirect_to post_path(@post), alert: 'Failed to add comment.'
-    end
+  if @answer.save
+    render json: {
+    id: @answer.id,
+    post_id: @post.id,
+    content: @answer.content,
+    username: @answer.user.username,
+    profile_photo_url: @answer.user.profile_photo.url,
+    is_current_user: @answer.user == current_user,
+    success: true },
+    status: :ok
+  else
+    render json: { success: false, errors: @answer.errors.full_messages }, status: :unprocessable_entity
   end
+end
 
   def edit
   end
 
   def update
     if @answer.update(answer_params)
-      redirect_to post_path(@answer.post), notice: "Comment has been updated ✅."
+      render json: { content: @answer.content, id: @answer.id, success: true }, status: :ok
     else
-      redirect_to post_path(@answer.post), alert: 'Failed to update comment.'
+      render json: { errors: @answer.errors.full_messages, success: false }, status: :unprocessable_entity
     end
   end
 
   def destroy
     @answer = Answer.find(params[:id])
+
     if @answer.destroy
-      redirect_to post_path, notice: "Comment has been deleted 🗑️."
+      render json: { message: "Comment deleted successfully." }, status: :ok
     else
-      redirect_to post_path, alert: "Failed to delete the comment 🛑."
+      render json: { error: "Failed to delete the comment." }, status: :unprocessable_entity
     end
   end
 

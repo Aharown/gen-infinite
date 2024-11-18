@@ -8,7 +8,6 @@ end
 def upvote
   @answer = find_post
   @answer.liked_by(current_user)
-  flash[:notice] = "Thanks for voting #{current_user.name}"
   redirect_to @post
 end
 

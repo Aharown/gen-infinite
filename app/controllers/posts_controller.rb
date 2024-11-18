@@ -70,7 +70,7 @@ class PostsController < ApplicationController
 
   def destroy
     if @post.destroy
-      redirect_to posts_path, notice: "Post has been deleted 🗑️."
+      redirect_to posts_path
     else
       redirect_to posts_path, alert: "Failed to delete the post 🛑."
     end
