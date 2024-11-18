@@ -248,10 +248,39 @@ h2 {
   color: var(--icon-hover-color);
 }
 
+.custom-vote-button {
+  font-weight: bold;
+  padding: 4px 4px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.custom-vote-button.upvote {
+  background-color: hsl(120, 1%, 30%);
+  color: white;
+}
+
+.custom-vote-button.downvote {
+  background-color: hsl(120, 1%, 30%);
+  color: white
+}
+
 .category-title {
   margin-top: 10px; /* Adds spacing above the title */
 }
 
 .mode-header {
   margin-top: 10px; /* Adds spacing above the title */
+}
+
+/* Active state for upvote button */
+.custom-vote-button.upvote.active {
+  background-color: hwb(120 6% 57%); /* Brighter green for active upvote */
+  color: white;
+}
+
+/* Active state for downvote button */
+.custom-vote-button.downvote.active {
+  background-color: hwb(0 5% 47%); /* Brighter red for active downvote */
+  color: white;
 }

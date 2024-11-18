@@ -23,6 +23,7 @@ class PostsController < ApplicationController
     end
     @answers = @post.answers.order(created_at: :desc)  # Order by newest first
     @new_answer = Answer.new
+    @tags = @post.tags
   end
 
   def new
@@ -76,22 +77,21 @@ class PostsController < ApplicationController
   end
 
   def upvote
-    @post = Post.find(params[:id])
-    @post.liked_by(current_user)
-
-    respond_to do |format|
-      format.json { render json: { upvotes: @post.get_upvotes.size } }
-      format.html { redirect_to @post }
+    if current_user.voted_up_on?(@post)
+      @post.unliked_by(current_user) # Unlike if already upvoted
+    else
+      @post.liked_by(current_user) # Like otherwise
     end
+    render json: vote_counts
   end
 
   def downvote
-    @post = Post.find(params[:id])
-    @post.unliked_by(current_user)
-    respond_to do |format|
-      format.json { render json: { downvotes: @post.get_downvotes.size } }
-      format.html { redirect_to @post }
+    if current_user.voted_down_on?(@post)
+      @post.undisliked_by(current_user) # Remove dislike if already downvoted
+    else
+      @post.disliked_by(current_user) # Downvote otherwise
     end
+    render json: vote_counts
   end
 
   private
@@ -117,5 +117,12 @@ class PostsController < ApplicationController
 
   def find_post
     @post = Post.find(params[:id])
+  end
+
+  def vote_counts
+    {
+      upvotes: @post.get_upvotes.size,
+      downvotes: @post.get_downvotes.size
+    }
   end
 end

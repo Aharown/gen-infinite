@@ -9,15 +9,18 @@ Rails.application.routes.draw do
 
   resources :posts do
     get 'category/:category_id', to: 'posts#index', as: :category_posts, on: :collection
-    member do
-      post 'upvote', action: 'upvote'
-      post 'downvote', action: 'downvote'
-    end
 
+      member do
+        post :upvote
+        post :downvote
+        delete :unvote
+      end
+    
     resources :answers, only: [:create, :update, :destroy] do
       member do
-        post 'upvote', action: 'upvote'
-        post 'downvote', action: 'downvote'
+        post :upvote
+        post :downvote
+        delete :unvote
       end
     end
   end
@@ -25,7 +28,7 @@ Rails.application.routes.draw do
 
 
   resources :users, only: [:show]
-  resources :tags, except: [:edit, :update]
+  resources :tags, except: %i[:edit, :update]
   resources :categories, only: [:show] do
     member do
       get :tags
