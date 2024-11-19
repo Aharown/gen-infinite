@@ -11,13 +11,12 @@
 require 'faker'
 require 'open-uri'
 
-User.destroy_all
-Post.destroy_all
-Answer.destroy_all
-Category.destroy_all
 PostTag.destroy_all
+Answer.destroy_all
+Post.destroy_all
 Tag.destroy_all
 Category.destroy_all
+User.destroy_all
 
 puts "Seeding categories and tags..."
 
@@ -25,12 +24,12 @@ categories = {
   "Technology" => ["AI", "Blockchain", "Cloud Computing", "Cybersecurity", "Programming", "Web Development"],
   "Entertainment" => ["Sports", "Gaming", "Movies", "Music", "Television"],
   "Lifestyle" => ["Sports", "Meals"],
-  "Science" => ["Physics", "Biology", "Astronomy", "Chemestry"],
+  "Science" => ["Physics", "Biology", "Astronomy", "Chemistry"],
   "Education" => ["Online Learning", "Classroom Management", "EdTech", "Curriculum Development"],
-  "Business" => ["Job Seeking", "Finance", "Project Management", "Human Ressources", "Marketing", "Economics", "Accounting"],
+  "Business" => ["Job Seeking", "Finance", "Project Management", "Human Resources", "Marketing", "Economics", "Accounting"],
   "Politics" => ["Countries", "Sovereignty", "Democracy", "Dictatorship"],
   "Arts" => ["Painting", "Drawing", "Modern", "Pottery", "Knitting"],
-  "Sports" => ["Football/Soccer", "American Football", "Tennis", "Basketball", "Volleyball", "Handball", "Natation"],
+  "Sports" => ["Football/Soccer", "American Football", "Tennis", "Basketball", "Volleyball", "Handball", "Swimming"],
   "DIY & Crafts" => ["Pottery", "Knitting", "Wood Working"],
   "Parenting" => ["Baby Care", "Teenagers", "Adulthood", "Children Care", "School"],
   "Other" => ["Others"]
