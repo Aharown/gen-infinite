@@ -57,25 +57,32 @@
   </div>
 
   <hr class="post-divider">
-  <div class="post-icons">
+  <div class="post-icons" data-controller="vote">
     <span class="post-icon">
       <%= link_to "#{post_path(post)}#answers" do %>
         <i class="fa fa-comment"></i> <!-- Comment icon -->
         <span><%= post.answers.count %></span>
       <% end %>
     </span>
-    <span class="post-icon" data-controller="vote">
+    <span class="post-icon">
       <%= link_to upvote_post_path(post),
         method: :post,
         remote: true,
-        data: { action: "vote#upvote" } do %>
+        data: { action: "vote#upvote", vote_target: "upvoteButton", id: post.id },
+        class: ("active" if post.votes.exists?(voter_id: current_user.id, votable_type: "Post", vote_flag: true)) do %>
         <i class="fa fa-thumbs-up"></i>
       <% end %>
-      <span><%= post.get_upvotes.size %></span>
+      <span id="upvote-count-<%= post.id %>" class="ms-2" data-vote-target="upvoteCount"><%= post.get_upvotes.size %></span>
     </span>
     <span class="post-icon">
-      <i class="fa fa-thumbs-down"></i>
-      <span><%= post.get_downvotes.size %></span> <!-- Downvote count -->
+      <%= link_to downvote_post_path(post),
+        method: :post,
+        remote: true,
+        data: { action: "vote#downvote", vote_target: "downvoteButton", id: post.id },
+        class: ("active" if post.votes.exists?(voter_id: current_user.id, votable_type: "Post", vote_flag: false)) do %>
+        <i class="fa fa-thumbs-down"></i>
+      <% end %>
+      <span id="downvote-count-<%= post.id %>" class="ms-2" data-vote-target="downvoteCount"><%= post.get_downvotes.size %></span>
     </span>
   </div>
 </div>

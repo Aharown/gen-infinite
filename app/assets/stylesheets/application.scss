@@ -248,21 +248,12 @@ h2 {
   color: var(--icon-hover-color);
 }
 
-.custom-vote-button {
-  font-weight: bold;
-  padding: 4px 4px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+.fa-thumbs-up {
+  margin-bottom: 2px;
 }
 
-.custom-vote-button.upvote {
-  background-color: hsl(120, 1%, 30%);
-  color: white;
-}
-
-.custom-vote-button.downvote {
-  background-color: hsl(120, 1%, 30%);
-  color: white
+.fa-thumbs-down {
+  margin-top: 3px;
 }
 
 .category-title {
@@ -274,13 +265,11 @@ h2 {
 }
 
 /* Active state for upvote button */
-.custom-vote-button.upvote.active {
-  background-color: hwb(120 6% 57%); /* Brighter green for active upvote */
-  color: white;
+
+a.active i.fa-thumbs-down {
+  color: hwb(0 5% 47%) !important; /* Brighter red */
 }
 
-/* Active state for downvote button */
-.custom-vote-button.downvote.active {
-  background-color: hwb(0 5% 47%); /* Brighter red for active downvote */
-  color: white;
+a.active i.fa-thumbs-up {
+  color: hwb(120 6% 57%) !important; /* Brighter green */
 }

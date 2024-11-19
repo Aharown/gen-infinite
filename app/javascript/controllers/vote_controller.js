@@ -10,6 +10,8 @@ export default class extends Controller {
     // Check if the user has already upvoted
     const isUpvoted = button.classList.contains("active");
 
+    button.classList.toggle("active");
+
     // Define the endpoint for the action
     const action = `/posts/${button.dataset.id}/upvote`;
 
@@ -24,6 +26,8 @@ export default class extends Controller {
     // Check if the user has already downvoted
     const isDownvoted = button.classList.contains("active");
 
+    button.classList.toggle("active");
+    
     // Define the endpoint for the action
     const action = `/posts/${button.dataset.id}/downvote`;
 

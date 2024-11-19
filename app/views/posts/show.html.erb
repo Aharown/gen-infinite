@@ -10,21 +10,16 @@
 
   <div class="post-header">
     <div class="user-profile-photo-show">
-      <%= image_tag(@post.user.profile_photo, alt: "#{@post.user.username}'s profile photo") if @post.user.profile_photo.attached? %>  </div>
+      <%= image_tag(@post.user.profile_photo, alt: "#{@post.user.username}'s profile photo") if @post.user.profile_photo.attached? %>
+    </div>
     <p class="username"><strong><%= link_to_user(@post.user) %></strong></p>
   </div>
-
-  <div class="post-header">
-    <h1><%= @post.title %></h1>
-    <p><%= link_to_user(@post.user) %></p>
-
 
   <div class="post-category">
     <h2><%= link_to @post.category.name, category_path(@post.category) %></h2>
   </div>
 
   <div class="post-tags">
-    <h4>Tags:</h4>
     <% if @tags.any? %>
       <ul>
         <% @tags.each do |tag| %>
@@ -35,6 +30,7 @@
       <p>No tags available for this category.</p>
     <% end %>
   </div>
+
   <div class="post-header-show">
     <h1><%= @post.title %></h1>
   </div>
@@ -51,7 +47,7 @@
             <% if media.content_type.start_with?('image') %>
               <%= cl_image_tag media.key, crop: :fill, class: 'd-block w-100 post-image' %>
             <% elsif media.content_type.start_with?('video') && media.url.present? %>
-              <video controls class="d-block w-100 post-video" data-bs-target="#carousel-<%= @post.id %>">
+              <video controls class="d-block w-100 post-video">
                 <source src="<%= media.url %>" type="<%= media.content_type %>">
                 Your browser does not support the video tag.
               </video>
@@ -83,42 +79,39 @@
     <% end %>
   <% end %>
 
-  <div class="vote-buttons d-flex align-items-center" data-controller="vote">
-    <!-- Upvote button and count -->
-    <div class="d-flex align-items-center me-3">
-      <%= button_to raw('<i class="fa fa-thumbs-up"></i>'),
-        upvote_post_path(@post),
+  <div class="post-icons" data-controller="vote">
+    <span class="post-icon">
+      <%= link_to upvote_post_path(@post),
         method: :post,
-        class: 'custom-vote-button upvote',
-        data: { action: "vote#upvote", vote_target: "upvoteButton", id: @post.id }
-      %>
-      <span id="upvote-count-<%= @post.id %>" class="ms-2" data-vote-target="upvoteCount"><%= @post.get_upvotes.size %></span>    
-    </div>
-
-    <!-- Downvote button and count -->
-    <div class="d-flex align-items-center">
-      <%= button_to raw('<i class="fa fa-thumbs-down"></i>'),
-        downvote_post_path(@post),
+        remote: true,
+        data: { action: "vote#upvote", vote_target: "upvoteButton", id: @post.id },
+        class: ("active" if @post.votes.exists?(voter_id: current_user.id, votable_type: "Post", vote_flag: true)) do %>
+        <i class="fa fa-thumbs-up"></i>
+      <% end %>
+      <span id="upvote-count-<%= @post.id %>" class="ms-2" data-vote-target="upvoteCount"><%= @post.get_upvotes.size %></span>
+    </span>
+    <span class="post-icon">
+      <%= link_to downvote_post_path(@post),
         method: :post,
-        class: 'custom-vote-button downvote',
-        data: { action: "vote#downvote", vote_target: "downvoteButton", id: @post.id }
-      %>
+        remote: true,
+        data: { action: "vote#downvote", vote_target: "downvoteButton", id: @post.id },
+        class: ("active" if @post.votes.exists?(voter_id: current_user.id, votable_type: "Post", vote_flag: false)) do %>
+        <i class="fa fa-thumbs-down"></i>
+      <% end %>
       <span id="downvote-count-<%= @post.id %>" class="ms-2" data-vote-target="downvoteCount"><%= @post.get_downvotes.size %></span>
-    </div>
+    </span>
   </div>
-
 
   <div class="answers-section" data-controller="comment">
     <%= form_with(model: [@post, @new_answer], local: false, html: { data: { controller: "comment-form", action: "submit->comment-form#submitComment" } }) do |form| %>
       <div class="form-group">
         <%= form.label :content, "Add a comment" %>
-        <%= form.text_area :content, rows: 1, class: "form-control",
-            data: { action: "focus->comment-form#showButtons", comment_form_target: "textarea" } %>
+        <%= form.text_area :content, rows: 1, class: "form-control", data: { action: "focus->comment-form#showButtons", comment_form_target: "textarea" } %>
       </div>
 
       <div class="form-buttons" data-comment-form-target="buttons" style="display: none;">
         <%= form.submit "Comment", class: "btn-primary" %>
-        <%= button_to "Clear", "#", method: :get, class: "btn-primary", data: { action: "click->comment-form#clearForm" } %>
+        <button type="button" class="btn-primary" data-action="click->comment-form#clearForm">Clear</button>
       </div>
     <% end %>
 
@@ -136,21 +129,21 @@
           </div>
 
           <% if answer.user == current_user %>
-            <div class="answer-actions" data-comment-form-target="answerbuttons">
-              <button class="btn-primary" data-action="click->comment#edit" data-comment-target="editButton">Edit</button>
+            <div class="answer-actions">
+              <button class="btn-primary" data-action="click->comment#edit">Edit</button>
               <%= button_to post_answer_path(@post, answer), method: :delete, class: "btn-primary", data: { action: "click->comment#deleteComment", comment_id: answer.id, url: post_answer_path(@post, answer) } do %>
                 Delete
               <% end %>
             </div>
 
-            <div class="edit-answer-form" style="display: none;" data-comment-target="editForm">
-              <%= form_with(model: [@post, answer], local: true, html: { data: { action: "submit->comment#update" } } ) do |form| %>
+            <div class="edit-answer-form" style="display: none;">
+              <%= form_with(model: [@post, answer], local: true, html: { data: { action: "submit->comment#update" } }) do |form| %>
                 <div class="form-group">
                   <%= form.label :content, "Edit your comment" %>
                   <%= form.text_area :content, rows: 1, class: "form-control", value: answer.content %>
                 </div>
                 <div class="form-buttons">
-                  <%= form.submit "Update", class: "btn-primary", data: { action: "click->comment#update" } %>
+                  <%= form.submit "Update", class: "btn-primary" %>
                   <button type="button" class="btn-primary" data-action="click->comment#cancelEdit">Cancel</button>
                 </div>
               <% end %>
@@ -160,22 +153,4 @@
       <% end %>
     </div>
   </div>
-
-
-  <%# <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Add event listeners to each edit button (whether link or button)
-    document.querySelectorAll('.edit-answer-button').forEach(button => {
-      button.addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent the default form submission
-        const answerId = this.dataset.answer_id; // Get the answer ID from data attribute
-        const answerContent = document.getElementById(`answer-content-${answerId}`);
-        const editForm = document.getElementById(`edit-answer-form-${answerId}`);
-
-        // Toggle visibility
-        answerContent.style.display = answerContent.style.display === 'none' ? 'block' : 'none';
-        editForm.style.display = editForm.style.display === 'none' ? 'block' : 'none';
-      });
-    });
-  });
-  </script> %>
+</body>
