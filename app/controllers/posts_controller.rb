@@ -65,7 +65,7 @@ class PostsController < ApplicationController
     end
 
     if @post.update(post_params.except(:photos))
-      redirect_to @post, notice: "Post has been updated ✅."
+      redirect_to @post
     else
       render :edit, status: :unprocessable_entity
     end
