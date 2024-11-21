@@ -1,6 +1,9 @@
-<div id="feed">
+<% if @posts.empty? %>
+  <p>No posts found for the specified category.</p>
+<% else %>
+  <div id="feed">
     <% @posts.each do |post| %>
       <%= render partial: 'posts/post_card', locals: { post: post } %>
     <% end %>
-
-</div>
+  </div>
+<% end %>

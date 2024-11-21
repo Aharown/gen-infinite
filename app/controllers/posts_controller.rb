@@ -4,7 +4,10 @@ class PostsController < ApplicationController
   before_action :find_post, only: %i[show upvote downvote]
 
   def index
-    if params[:category_id]
+    if params[:search] && params[:search][:query].present?
+      @category = Category.find_by('lower(name) = ?', params[:search][:query].downcase)
+      @posts = @category ? @category.posts.order(created_at: :desc) : Post.none
+    elsif params[:category_id]
       @posts = Post.where(category_id: params[:category_id]).order(created_at: :desc)
     else
       @posts = Post.joins(:category)
