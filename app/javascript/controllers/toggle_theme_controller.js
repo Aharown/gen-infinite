@@ -7,11 +7,16 @@ export default class extends Controller {
     const theme = localStorage.getItem("theme");
     if (theme === "dark") {
       document.documentElement.classList.add("dark-mode");
+      document.documentElement.classList.remove("light-mode");
+      this.iconTarget.classList.add("fa-sun");
+      this.iconTarget.classList.remove("fa-moon");
+      this.modeTextTarget.textContent = "Light";
+    } else {
+      document.documentElement.classList.add("light-mode");
+      document.documentElement.classList.remove("dark-mode");
       this.iconTarget.classList.add("fa-moon");
       this.iconTarget.classList.remove("fa-sun");
-      this.modeTextTarget.textContent = "Dark";  // Set text to 'Dark'
-    } else {
-      this.modeTextTarget.textContent = "Light";  // Set text to 'Light'
+      this.modeTextTarget.textContent = "Dark";
     }
   }
 
@@ -19,8 +24,8 @@ export default class extends Controller {
     document.documentElement.classList.toggle("dark-mode");
 
     // Toggle the icon between moon and sun
-    this.iconTarget.classList.toggle("fa-moon");
     this.iconTarget.classList.toggle("fa-sun");
+    this.iconTarget.classList.toggle("fa-moon");
 
     // Toggle the text between 'Light' and 'Dark'
     this.modeTextTarget.textContent = document.documentElement.classList.contains("dark-mode") ? "Light" : "Dark";
