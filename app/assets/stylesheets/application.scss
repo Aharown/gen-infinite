@@ -32,12 +32,12 @@
   padding: 8px 24px;
   border-radius: 50px;
   font-weight: normal;
-  opacity: 0.6;
+  opacity: 0.8;
   transition: opacity 0.3s ease, color 0.3s ease, border 0.3s ease;
 
   &:hover {
     opacity: 1; /* Make the button fully visible on hover */
-    border-color: var(--btn-hover-color);
+    background-color: var(--btn-background-color) !important;
   }
 }
 
@@ -165,19 +165,22 @@ a {
   --input-background-color: #F5F5F5; /* Dark background for input fields */
   --input-border-color: #BEBFC5;     /* Light grey border for input fields */
   --placeholder-color: #BEBFC5;
-  --btn-text-color: #000000;     /* Dark text */
+  --btn-text-color: #FFFDD0;     /* Dark text */
   --btn-border-color: #BEBFC5;   /* Light grey border */
-  --btn-background-color: #BEBFC5;
+  --btn-background-color: #0070FF;
   --postcard-background-color: #F7F7F7;
   --show-background-color: #E5E4E2;
   --post-show-background-color: #F7F7F7;
   --user-show-background-color: #E5E4E2;
+  --dropdown-text-color: #000000;
+  --dropdown-background-color: #FFFFFF;
+  --dropdown-hover-bg-color: #89CFF0;
 }
 
 /* Dark Mode */
 :root.dark-mode {
   --background-color: #121212;  /* Dark background */
-  --text-color: #B2FFFF;        /* Light text */
+  --text-color: #B2FFFF;
   --icon-color: #DBD7D2;
   --h2-text-color: #B2FFFF;
   --username-text-color: #DBD7D2;
@@ -187,13 +190,16 @@ a {
   --input-background-color: #1A1A1A; /* Dark background for input fields */
   --input-border-color: #666666;     /* Light grey border for input fields */
   --placeholder-color: #CCCCCC;
-  --btn-text-color: #FFFFFF;     /* White text */
-  --btn-border-color: #FFFFFF;
+  --btn-text-color: #B2FFFF;     /* White text */
+  --btn-border-color: transparent;
   --btn-hover-color: #15F4EE;
-  --btn-background-color: transparent;
+  --btn-background-color: #2A3439;
   --postcard-background-color: #1B1B1B;
   --post-show-background-color: #121212;
   --user-show-background-color: #121212;
+  --dropdown-background-color: #414A4C;
+  --dropdown-text-color: #FFFFFF;
+  --dropdown-hover-bg-color: #DBD7D2;
 }
 
 .navbar-lewagon {
@@ -238,14 +244,22 @@ h2 {
 
 .navbar-brand-name {
   color: #0000FF;
+  margin-top: 3px;
+  margin-left: 7px;
 }
 
 .fa-infinity {
   color: #DAA520;
+  margin-bottom: 1px;
+  margin-left: 4px;
 }
 /* Dark mode icons */
 .icon {
   color: var(--icon-hover-color);
+}
+
+.fa-user-circle {
+  margin-right: 2px;
 }
 
 .fa-thumbs-up {

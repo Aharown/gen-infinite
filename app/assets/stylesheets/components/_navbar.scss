@@ -13,6 +13,7 @@
   margin: 0 auto; /* Centers the navbar horizontally */
   padding-top: 17px;
   padding-right: 4px;
+  padding-bottom: 8px;
 }
 
 /* Flexbox container for navbar items */
@@ -32,7 +33,7 @@
   font-style: italic;
   color: black;
   padding-left: 5px;
-  margin-right: 5px;
+  margin-bottom: 6px;
 }
 
 /* Search bar styles */
@@ -40,7 +41,8 @@
 .search-form-control {
   position: relative;
   width: 200px;
-  padding-left: 15px;
+  margin-left: 12px;
+  margin-top: 3px;
 }
 
 .search-form-control .btn {
@@ -109,6 +111,17 @@
   overflow-x: auto;
 }
 
+.dropdown-menu.dropdown-menu-end {
+  background-color: var(--dropdown-background-color);
+}
+
+.dropdown-item {
+  color: var(--dropdown-text-color);
+}
+
+.dropdown-item:hover {
+  background-color: var(--dropdown-hover-bg-color);
+}
 
 /* For smaller screens (mobile responsiveness) */
 @media (max-width: 768px) {
