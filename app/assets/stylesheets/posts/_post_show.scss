@@ -1,14 +1,12 @@
-/* Form controls */
 .form-control {
-  background-color: var(--input-background-color);  /* Background color */
-  color: var(--text-color) !important;                    /* Text color */
-  border: 1px solid var(--input-border-color);       /* Border color */
+  background-color: var(--input-background-color);
+  color: var(--text-color) !important;
+  border: 1px solid var(--input-border-color);
   border-radius: 17px;
 }
 
-/* Prevent the background from changing on focus */
 .form-control:focus {
-  background-color: var(--input-background-color) !important; /* Or use the color you prefer */
+  background-color: var(--input-background-color) !important;
   border: 1px solid var(--input-border-color);
 }
 
@@ -16,80 +14,74 @@
   color: var(--placeholder-color);
 }
 
-/* Add space between the comment input field and the buttons */
 .form-group {
-  margin-bottom: 10px; /* This adds space below the comment text area */
+  margin-bottom: 10px;
 }
 
 .form-buttons {
-  margin-top: 5px; /* This adds space above the buttons */
+  margin-top: 5px;
   margin-bottom: 8px;
 }
 
-/* Optional: Add margin to the buttons themselves for more space */
 .btn-primary {
-  margin-right: 5px; /* Adds space between buttons */
-  margin-bottom: 5px; /* This adds space below the comment text area */
+  margin-right: 5px;
+  margin-bottom: 5px;
 }
 
 .user-profile-photo-show {
-  width: 30px; /* Size of profile photo */
+  width: 30px;
   height: 30px;
-  border-radius: 50%; /* Make the image circular */
+  border-radius: 50%;
   overflow: hidden;
   img {
     width: 100%;
-    height: auto; /* Maintain aspect ratio */
+    height: auto;
   }
 }
 
 .post-header-show {
   display: flex;
   align-items: center;
-  gap: 10px; /* Adjust spacing between photo and username */
-  margin-bottom: 10px; /* Spacing between header and content */
-  color: var(----h2-text-color);                    /* Text color */
+  gap: 10px;
+  margin-bottom: 10px;
+  color: var(----h2-text-color);
 }
 
 .post-header-comments {
   display: flex;
   align-items: center;
-  gap: 10px; /* Adjust spacing between photo and username */
-  margin-bottom: 3px; /* Spacing between header and content */
+  gap: 10px;
+  margin-bottom: 3px;
 }
 
 .post-category h2 {
   font-size: large;
 }
 
-
-/* Ensure the buttons are displayed horizontally */
 .answer-actions {
-  display: flex; /* Use flexbox to align the buttons horizontally */
-  gap: 10px; /* Adds space between the buttons */
+  display: flex;
+  gap: 10px;
   padding-bottom: 5px;
 }
 
 .answer-ed-actions {
-  display: flex; /* Use flexbox to align the buttons horizontally */
-  gap: 10px; /* Adds space between the buttons */
+  display: flex;
+  gap: 10px;
   padding-bottom: 5px;
   margin-top: 20px;
 }
 
 .post-divider {
-  margin-top: 7px; /* Decrease to bring it closer to the buttons */
+  margin-top: 7px;
 }
 
-.p
-/* Optional: If you need to style the buttons to look aligned or consistent */
 .edit-answer-button, .delete-answer-button {
   display: inline-block;
-  margin: 0; /* Remove default margins if necessary */
+  margin: 0;
 }
 
 .vote-buttons {
-  margin-bottom: 13px; /* Adjust as needed */
+  margin-bottom: 13px; 
 }
 
 .reply {

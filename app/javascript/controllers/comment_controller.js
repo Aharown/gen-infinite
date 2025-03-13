@@ -3,7 +3,6 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["editForm", "editButton", "commentsList", "answerbuttons"];
 
-  // Trigger the display of the edit form and pre-populate the content
   edit(event) {
     event.preventDefault();
     const editButton = event.target;
@@ -14,16 +13,14 @@ export default class extends Controller {
     editForm.querySelector("textarea").value = contentElement.textContent.trim();
   }
 
-  // Handle canceling the edit
   cancelEdit(event) {
     event.preventDefault();
     const editForm = event.target.closest(".edit-answer-form");
     editForm.style.display = "none";
   }
 
-  // Handle form submission (Update comment)
   update(event) {
-    event.preventDefault();  // Prevent default form submission
+    event.preventDefault();
     const form = event.target.closest('form');
     const url = form.action;
     const data = new FormData(form);
@@ -42,9 +39,9 @@ export default class extends Controller {
         const editForm = answerElement.querySelector(".edit-answer-form");
         const buttons = editForm.querySelector(".form-buttons");
 
-        contentElement.textContent = data.content;  // Update content
-        editForm.style.display = "none";  // Hide the edit form
-        buttons.style.display = "none";  // Hide the buttons
+        contentElement.textContent = data.content;
+        editForm.style.display = "none";
+        buttons.style.display = "none";
       } else {
         alert("Failed to update the answer.");
       }
@@ -66,7 +63,7 @@ export default class extends Controller {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data);  // Log the response to ensure it contains the necessary data
+        console.log(data);  
         if (data.message) {
           document.getElementById(`answer-${button.dataset.commentId}`).remove();
         } else {

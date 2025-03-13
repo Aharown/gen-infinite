@@ -23,14 +23,11 @@ export default class extends Controller {
   toggleDarkMode() {
     document.documentElement.classList.toggle("dark-mode");
 
-    // Toggle the icon between moon and sun
     this.iconTarget.classList.toggle("fa-sun");
     this.iconTarget.classList.toggle("fa-moon");
 
-    // Toggle the text between 'Light' and 'Dark'
     this.modeTextTarget.textContent = document.documentElement.classList.contains("dark-mode") ? "Light" : "Dark";
 
-    // Save the user's theme preference in localStorage
     localStorage.setItem("theme", document.documentElement.classList.contains("dark-mode") ? "dark" : "light");
   }
 }

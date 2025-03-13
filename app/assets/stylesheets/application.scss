@@ -26,9 +26,9 @@
 }
 
 .btn-primary {
-  color: var(--btn-text-color);              /* Text color based on mode */
-  border: 1px solid var(--btn-border-color); /* Border color based on mode */
-  background-color: var(--btn-background-color); /* Transparent background */
+  color: var(--btn-text-color);
+  border: 1px solid var(--btn-border-color);
+  background-color: var(--btn-background-color);
   padding: 8px 24px;
   border-radius: 50px;
   font-weight: normal;
@@ -36,7 +36,7 @@
   transition: opacity 0.3s ease, color 0.3s ease, border 0.3s ease;
 
   &:hover {
-    opacity: 1; /* Make the button fully visible on hover */
+    opacity: 1;
     background-color: var(--btn-background-color) !important;
   }
 }
@@ -79,7 +79,7 @@
 
 a {
   text-decoration: none;
-  color: inherit; /* Optional: This ensures the text color matches the surrounding text */
+  color: inherit;
 }
 
 .roboto-thin {
@@ -154,19 +154,18 @@ a {
   font-style: italic;
 }
 
-/* Light Mode (default) */
 :root {
-  --background-color: #E5E4E2;  /* Light background */
-  --text-color: #414A4C;        /* Dark text */
-  --icon-color: #808080;        /* Dark icons */
+  --background-color: #E5E4E2;
+  --text-color: #414A4C;
+  --icon-color: #808080;
   --navbar-background-color: #F7F7F7;
   --navbar-border-bottom: 1px solid #C0C0C0;
   --icon-hover-color: black;
-  --input-background-color: #F5F5F5; /* Dark background for input fields */
-  --input-border-color: #BEBFC5;     /* Light grey border for input fields */
+  --input-background-color: #F5F5F5;
+  --input-border-color: #BEBFC5;
   --placeholder-color: #BEBFC5;
-  --btn-text-color: #FFFDD0;     /* Dark text */
-  --btn-border-color: #BEBFC5;   /* Light grey border */
+  --btn-text-color: #FFFDD0;
+  --btn-border-color: #BEBFC5;
   --btn-background-color: #0070FF;
   --postcard-background-color: #F7F7F7;
   --show-background-color: #E5E4E2;
@@ -177,9 +176,8 @@ a {
   --dropdown-hover-bg-color: #89CFF0;
 }
 
-/* Dark Mode */
 :root.dark-mode {
-  --background-color: #121212;  /* Dark background */
+  --background-color: #121212;
   --text-color: #B2FFFF;
   --icon-color: #DBD7D2;
   --h2-text-color: #B2FFFF;
@@ -187,10 +185,10 @@ a {
   --navbar-background-color: #414A4C;
   --navbar-border-bottom: #414A4C;
   --icon-hover-color: #FFFFFF;
-  --input-background-color: #1A1A1A; /* Dark background for input fields */
-  --input-border-color: #666666;     /* Light grey border for input fields */
+  --input-background-color: #1A1A1A;
+  --input-border-color: #666666;
   --placeholder-color: #CCCCCC;
-  --btn-text-color: #B2FFFF;     /* White text */
+  --btn-text-color: #B2FFFF;
   --btn-border-color: transparent;
   --btn-hover-color: #15F4EE;
   --btn-background-color: #2A3439;
@@ -203,18 +201,17 @@ a {
 }
 
 .navbar-lewagon {
-  background-color: var(--navbar-background-color); /* Use CSS var for easier theming */
+  background-color: var(--navbar-background-color);
   border-bottom: var(--navbar-border-bottom);
 }
 
-/* Apply background color to body, for example */
 body {
   background-color: var(--background-color);
   color: var(--text-color);
 }
 
 h1 {
-  color: var(--h2-text-color);                    /* Text color */
+  color: var(--h2-text-color);
 }
 
 .post-show {
@@ -275,19 +272,18 @@ h2 {
 }
 
 .category-title {
-  margin-top: 10px; /* Adds spacing above the title */
+  margin-top: 10px;
 }
 
 .mode-header {
-  margin-top: 10px; /* Adds spacing above the title */
+  margin-top: 10px;
 }
 
-/* Active state for upvote button */
 
 a.active i.fa-thumbs-down {
-  color: hwb(0 5% 47%) !important; /* Brighter red */
+  color: hwb(0 5% 47%) !important;
 }
 
 a.active i.fa-thumbs-up {
-  color: hwb(120 6% 57%) !important; /* Brighter green */
+  color: hwb(120 6% 57%) !important; 
 }

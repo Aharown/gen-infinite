@@ -40,7 +40,6 @@ export default class extends Controller {
         if (data.success) {
           const commentSection = document.getElementById("answers");
 
-          // Create the new comment HTML
           const newComment = document.createElement("div");
           newComment.classList.add("answer");
           newComment.id = `answer-${data.id}`;
@@ -85,7 +84,6 @@ export default class extends Controller {
 
         commentSection.prepend(newComment);
 
-        // Clear the input field
         this.textareaTarget.value = "";
       } else {
         alert("Failed to add comment.");

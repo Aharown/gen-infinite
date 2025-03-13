@@ -1,26 +1,24 @@
-/* Navbar layout */
 .container-fluid {
   padding: 0;
   margin: 0;
 }
 
 .navbar-lewagon {
-  background-color: var(--navbar-background-color, #BEBFC5); /* Use CSS var for easier theming */
+  background-color: var(--navbar-background-color, #BEBFC5);
   width: 100%;
   position: fixed;
   z-index: 1000;
   max-width: 1200px;
-  margin: 0 auto; /* Centers the navbar horizontally */
+  margin: 0 auto;
   padding-top: 17px;
   padding-right: 4px;
   padding-bottom: 8px;
 }
 
-/* Flexbox container for navbar items */
 .navbar-inner {
-  padding: 0px;   /* Adds side padding for content alignment */
+  padding: 0px;
   display: flex;
-  justify-content: space-between; /* Space out the logo, search bar, and icons */
+  justify-content: space-between;
   align-items: center;
   width: 100%;
 }
@@ -35,8 +33,6 @@
   padding-left: 5px;
   margin-bottom: 6px;
 }
-
-/* Search bar styles */
 
 .search-form-control {
   position: relative;
@@ -71,13 +67,10 @@
   color: black !important;
 }
 
-/* Navbar icons container */
-
 .navbar-icons .icon-item {
-  margin: 0; /* Remove any default margins on individual icons */
+  margin: 0;
 }
 
-/* Icon button styling */
 .navbar-icons .btn {
   background: transparent;
   border: none;
@@ -89,13 +82,8 @@
 
 
 .navbar-icons .btn:hover {
-  color: #FE0000; /* Hover color for icons */
+  color: #FE0000;
 }
-
-
-
-/* Ensuring the bottom border is visible */
-
 
 .dropdown .btn i {
   padding-left: 10px;
@@ -125,29 +113,28 @@
   background-color: var(--dropdown-hover-bg-color);
 }
 
-/* For smaller screens (mobile responsiveness) */
 @media (max-width: 768px) {
   .navbar-inner {
     display: flex;
-    flex-wrap: nowrap; /* Prevent wrapping */
+    flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
   }
 
   .custom-dropdown {
-    margin-left: 0; /* For mobile, remove the left margin */
+    margin-left: 0;
   }
 
   .search-container {
-    flex-grow: 1; /* Take up remaining space */
-    max-width: 200px; /* Allow some flexibility for smaller screens */
+    flex-grow: 1;
+    max-width: 200px;
     margin-bottom: 10px;
     margin: 0 10px;
   }
 
   .navbar-icons {
     display: flex;
-    justify-content: flex-end;/* Keep icons aligned to the far right */
+    justify-content: flex-end;
   }
 
   .navbar-logo {

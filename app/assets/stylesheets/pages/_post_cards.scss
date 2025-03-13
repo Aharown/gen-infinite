@@ -13,13 +13,13 @@ body {
 }
 
 .post-card {
-  border: transparent; // Border color, adjust for dark/light mode as needed
+  border: transparent; 
   border-radius: 12px;
   padding: 16px;
   margin-top: 10px;
   margin-bottom: 8px;
   background-color: var(--postcard-background-color);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // Optional shadow for effect
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
   .post-content {
     margin-top: 8px;
@@ -27,41 +27,41 @@ body {
 }
 
 .post-content p span {
-  margin-left: 2px; /* Space between 'Category:' and category */
+  margin-left: 2px;
 }
 
 .post-image,
 .post-video {
-  width: 100%;   /* Makes media take the full width of the post-card */
-  height: 400px;  /* Adjusts the height automatically to keep the aspect ratio */
-  margin: 0 auto;   /* Centers the media horizontally if it's smaller than full width */
-  border-radius: 8px; /* Optional: Adds rounded corners */
+  width: 100%;
+  height: 400px;
+  margin: 0 auto;
+  border-radius: 8px;
 }
 
 
 .user-profile-photo {
-  width: 40px; /* Size of profile photo */
+  width: 40px;
   height: 40px;
-  border-radius: 50%; /* Make the image circular */
+  border-radius: 50%;
   overflow: hidden;
   img {
     width: 100%;
-    height: auto; /* Maintain aspect ratio */
+    height: auto;
   }
 }
 
 .post-header {
   display: flex;
   align-items: center;
-  gap: 10px; /* Adjust spacing between photo and username */
-  margin-bottom: 20px; /* Spacing between header and content */
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 .username {
   font-weight: bold;
   color: var(--text-color);
   position: relative;
-  top: 9px; /* Adjust this value to control the downward movement */
+  top: 9px;
 }
 
 .post-icons {
