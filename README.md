@@ -7,6 +7,7 @@ A knowledge sharing platform designed to connect users from different generation
 🚀 Features
 	•	✅ User Authentication – Secure sign-up, login, and logout functionality.
 	•	✅ Post Creation – Users can create and share posts on topics of interest.
+  •	✅ Media Uploads – Support for image uploads within posts and comments.
 
   ![GEN INFINITE CREATE LISTING GIF](https://github.com/Aharown/gen-infinite/blob/master/app/assets/images/GEN%20INFINITE%20CREATE%20LISTING.gif)
 
@@ -14,11 +15,6 @@ A knowledge sharing platform designed to connect users from different generation
 	•	✅ Comment System – Users can interact by commenting on posts.
 
   ![GEN-INFINITE COMMENT THREAD GIF](https://github.com/Aharown/gen-infinite/blob/master/app/assets/images/GEN-INFINITE%20COMMENT%20THREAD.gif)
-
-	•	✅ Media Uploads – Support for image uploads within posts and comments.
-	•	✅ Responsive Design – Optimized for both desktop and mobile devices.
-
-  ![GEN-INFINITE MAIN MENU GIF](https://github.com/Aharown/gen-infinite/blob/master/app/assets/images/GEN-INFINITE%20MAIN%20MENU.gif)
 
   🛠 Tech Stack
 	•	Backend: Ruby on Rails
