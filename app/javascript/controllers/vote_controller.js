@@ -7,31 +7,24 @@ export default class extends Controller {
     event.preventDefault();
     const button = event.currentTarget;
 
-    // Check if the user has already upvoted
     const isUpvoted = button.classList.contains("active");
 
     button.classList.toggle("active");
 
-    // Define the endpoint for the action
     const action = `/posts/${button.dataset.id}/upvote`;
 
-    // Send the AJAX request
     this._sendRequest(action, "POST", button, "upvote", isUpvoted);
   }
 
   downvote(event) {
     event.preventDefault();
     const button = event.currentTarget;
-
-    // Check if the user has already downvoted
     const isDownvoted = button.classList.contains("active");
 
     button.classList.toggle("active");
-    
-    // Define the endpoint for the action
+
     const action = `/posts/${button.dataset.id}/downvote`;
 
-    // Send the AJAX request
     this._sendRequest(action, "POST", button, "downvote", isDownvoted);
   }
 
@@ -42,11 +35,8 @@ export default class extends Controller {
     })
       .then(response => response.json())
       .then(data => {
-        // Update the vote counts in the DOM
         this.upvoteCountTarget.textContent = data.upvotes;
         this.downvoteCountTarget.textContent = data.downvotes;
-
-        // Update button states
         this._updateButtonState(button, type, isActive, data);
       });
   }
@@ -55,22 +45,17 @@ export default class extends Controller {
     const isUpvote = type === "upvote";
     const otherButton = isUpvote ? this.downvoteButtonTarget : this.upvoteButtonTarget;
 
-    // Handle the active state based on the current vote status
     if (isUpvote) {
       if (isActive) {
-        // If upvote was already active, deactivate it
         button.classList.remove("active");
       } else {
-        // Activate upvote and deactivate downvote
         button.classList.add("active");
         otherButton.classList.remove("active");
       }
     } else {
       if (isActive) {
-        // If downvote was already active, deactivate it
         button.classList.remove("active");
       } else {
-        // Activate downvote and deactivate upvote
         button.classList.add("active");
         otherButton.classList.remove("active");
       }

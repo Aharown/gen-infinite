@@ -1,13 +1,11 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-    <div class="navbar-inner"> <!-- Flexbox container -->
-      <!-- Logo -->
+    <div class="navbar-inner">
       <%= link_to posts_path, class: "d-flex align-items-center" do %>
         <span class="navbar-brand-name">G</span>
         <i class="fa-solid fa-infinity" style="font-size: 30px;"></i>
       <% end %>
 
-      <!-- Search Bar -->
       <div class="search-container">
         <%= simple_form_for :search, url: posts_path, method: :get do |f| %>
           <div class="search-form-control form-group">
@@ -20,7 +18,6 @@
       </div>
 
       <div class="navbar-icons">
-        <!-- Categories Icon -->
         <div class="dropdown">
           <button class="btn btn-ghost" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fas fa-th-list" style="font-size: 24px;"></i>
@@ -29,7 +26,7 @@
             <% @categories.each do |category| %>
               <li>
                 <%= link_to category_path(category), class: "dropdown-item" do %>
-                  <%= category.name %>  <!-- Display only the category name -->
+                  <%= category.name %>  
                 <% end %>
               </li>
             <% end %>

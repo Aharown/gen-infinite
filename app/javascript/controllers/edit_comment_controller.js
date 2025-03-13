@@ -20,7 +20,6 @@ export default class extends Controller {
   }
 
   submitForm(event) {
-    // Optionally add custom logic for submission here
     console.log("Form submitted");
   }
 }
