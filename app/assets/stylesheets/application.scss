@@ -213,6 +213,10 @@ body {
   color: var(--text-color);
 }
 
+h1 {
+  color: var(--h2-text-color);                    /* Text color */
+}
+
 .post-show {
   background-color: var(--post-show-background-color);
 }

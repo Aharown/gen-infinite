@@ -48,6 +48,7 @@
   align-items: center;
   gap: 10px; /* Adjust spacing between photo and username */
   margin-bottom: 10px; /* Spacing between header and content */
+  color: var(----h2-text-color);                    /* Text color */
 }
 
 .post-header-comments {
@@ -60,6 +61,7 @@
 .post-category h2 {
   font-size: large;
 }
+
 
 /* Ensure the buttons are displayed horizontally */
 .answer-actions {
